@@ -14,23 +14,23 @@ typography:
   display:
     fontFamily: Instrument Serif
     fontSize: 3.5rem
-    fontWeight: 700
+    fontWeight: 400
     lineHeight: 1.15
     letterSpacing: -0.01em
   section-title:
     fontFamily: Instrument Serif
     fontSize: 2rem
-    fontWeight: 700
+    fontWeight: 400
     lineHeight: 1.2
   quote-editorial:
     fontFamily: Instrument Serif
     fontSize: 1.35rem
-    fontWeight: 500
+    fontWeight: 400
     lineHeight: 1.4
   step-index:
     fontFamily: Instrument Serif
     fontSize: 2rem
-    fontWeight: 700
+    fontWeight: 400
     lineHeight: 1
   body-md:
     fontFamily: Inter
@@ -162,9 +162,10 @@ a token because borders are structural rules, not fills.
 A refined editorial serif carries voice; a functional grotesque carries data.
 
 - **Display (`display`, `section-title`):** Instrument Serif at `3.5rem` /
-  `2rem`, weight 700. Fallbacks: Newsreader, Georgia.
+  `2rem`. The face ships only a regular cut; hierarchy comes from scale, not
+  synthetic bolding. Fallbacks: Newsreader, Georgia.
 - **Editorial quotes (`quote-editorial`):** Instrument Serif at `1.35rem`,
-  weight 500, line-height 1.4 — used inside accent callouts.
+  line-height 1.4 — used inside accent callouts.
 - **Feature numbers (`step-index`):** Instrument Serif at `2rem`, always
   colored Tertiary blue (`01`, `02`, `03`).
 - **Body (`body-md`, `body-lede`):** Inter at `1rem` / `1.125rem`,
