@@ -15,9 +15,12 @@ const SITE_URL = 'https://wollacksystems.github.io';
 // Founder portrait: drop a photo at public/will-wollack.png and rebuild —
 // it then feeds both the /about hero plate and the Person schema below.
 // Anchored on the project cwd (where npm run build/dev always runs).
+// FOUNDER_PORTRAIT is root-relative so the <img> resolves in dev/preview
+// too; FOUNDER_PORTRAIT_ABSOLUTE is the canonical URL for JSON-LD.
 export const FOUNDER_PORTRAIT = existsSync(join(process.cwd(), 'public', 'will-wollack.png'))
-  ? `${SITE_URL}/will-wollack.png`
+  ? '/will-wollack.png'
   : null;
+export const FOUNDER_PORTRAIT_ABSOLUTE = FOUNDER_PORTRAIT ? `${SITE_URL}${FOUNDER_PORTRAIT}` : null;
 
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const PERSON_WILL_ID = `${SITE_URL}/#will-wollack`;
@@ -54,7 +57,7 @@ export function personWillWollack() {
     jobTitle: 'Founder',
     worksFor: { '@id': ORG_ID },
     email: 'willwollack@gmail.com',
-    ...(FOUNDER_PORTRAIT ? { image: FOUNDER_PORTRAIT } : {}),
+    ...(FOUNDER_PORTRAIT_ABSOLUTE ? { image: FOUNDER_PORTRAIT_ABSOLUTE } : {}),
     description:
       'Founder of Wollack Systems, capturing the expertise of experienced manufacturing operators before it retires with them.',
     knowsAbout: ['manufacturing', 'knowledge capture', 'apprenticeship', 'industrial maintenance'],
