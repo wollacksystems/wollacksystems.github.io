@@ -1,31 +1,35 @@
 ---
-// Landing page — canonical slate + electric blue Industrial Editorial theme.
+// Landing page — the Wollack Systems story: who Will Wollack is, why he's
+// building it, and how (hustle, networking, and a cofounder found mid-pitch).
+// Canonical slate + electric blue Industrial Editorial theme (see DESIGN.md).
+// Product detail lives on /journeyman (the "Rust & Iron" variant page).
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Wollack Systems &mdash; Capturing manufacturing expertise before it retires"
-  description="Wollack Systems records what your best machinists know &mdash; hands-free &mdash; and turns it into a permanent record your plant owns. Book a walkthrough."
+  title="Wollack Systems — Capturing manufacturing expertise before it retires"
+  description="Will Wollack is building Wollack Systems to record what America's best machinists know — hands-free — before it retires with them. Meet the founder, read the mission, book a walkthrough."
 >
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">Knowledge capture for American manufacturing</p>
-        <h1>The machine is down. Nobody on the floor can fix it.</h1>
+        <h1>American manufacturing is about to forget how it works. We're here to write it down.</h1>
         <p class="lede">
-          So they call back a man who retired six years ago. He listens. Puts his ear to the
-          housing. Taps it once, with a small hammer.
+          Somewhere right now, a plant is calling back a man who retired six years ago. He listens.
+          Puts his ear to the housing. Taps it once, with a small hammer.
           <strong>The machine runs.</strong>
         </p>
         <p class="lede-strong">
-          Your best people are retiring. We record what they know &mdash; without asking them to
-          touch a computer &mdash; so the plant keeps knowing what they knew.
+          That $10,000 invoice &mdash; $9,995 of it for knowing where to tap &mdash; is why Will
+          Wollack started Wollack Systems: to record what your best people know, without asking
+          them to touch a computer, so the plant keeps knowing what they knew.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request"
             >Book a walkthrough</a
           >
-          <a class="btn btn-ghost" href="/#how">See how it works</a>
+          <a class="btn btn-ghost" href="/#founder">Meet the founder</a>
         </div>
       </div>
 
@@ -43,10 +47,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- Problem -->
-  <section class="section section-tinted" id="why">
+  <!-- The founder -->
+  <section class="section section-tinted" id="founder">
     <div class="container">
-      <h2>America is reshoring its machines.<br />Nobody is capturing the knowledge.</h2>
+      <h2>Who is Will Wollack?</h2>
+      <p class="lede">
+        Will Wollack is the founder of Wollack Systems and the voice of Journeyman. He builds the
+        old way: show up, network, hustle. Trade events, shop tours, chamber mixers, cold
+        handshakes &mdash; anywhere the people who make things gather, the same idea gets said out
+        loud: <strong>the knowledge that runs your plant is one retirement from gone.</strong>
+      </p>
+      <p class="lede">
+        He isn't chasing software for its own sake. He's building something real &mdash; a
+        permanent record of the expertise that keeps American plants running, captured from the
+        people who hold it while it can still be captured.
+      </p>
+      <div class="accent-callout">
+        <p>
+          Every company starts as a pitch somebody was stubborn enough to keep giving. This one
+          was given at a networking event in Newport Beach.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The mission -->
+  <section class="section" id="mission">
+    <div class="container">
+      <h2>Why he's building it</h2>
       <div class="grid-3">
         <div class="fact">
           <div class="fact-number">&asymp;1/3</div>
@@ -69,98 +97,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
       <p class="section-close">
         When the best troubleshooter on the floor retires, the line runs slower, scrap goes up
-        &mdash; and nobody can say why.
+        &mdash; and nobody can say why. The people who know are still alive and still reachable.
+        That won't last.
       </p>
-      <div class="accent-callout">
-        <p>
-          The people who know are still alive and still reachable. That won't last.
-        </p>
-      </div>
     </div>
   </section>
 
-  <!-- How it works -->
-  <section class="section" id="how">
+  <!-- How it's being built -->
+  <section class="section section-tinted" id="how">
     <div class="container">
-      <h2>He never touches a screen.</h2>
+      <h2>How: hustle first, then the record.</h2>
       <ol class="steps">
         <li>
-          <h3>A mic on his collar. Cameras on the machine.</h3>
+          <h3>Show up. Pitch. Repeat.</h3>
           <p>
-            An AI voice hears or sees something and asks the right question at the right moment
-            &mdash; catching the answer the moment it exists, because ten minutes later he'll say
-            &ldquo;it sounded wrong&rdquo; and nothing more.
+            Will does the unscalable thing on purpose &mdash; face to face. Networking events,
+            plant walkthroughs, conversations standing next to the machine. Every pitch is the
+            same idea said out loud until the right people hear it.
           </p>
         </li>
         <li>
-          <h3>We turn talk into record.</h3>
+          <h3>One pitch found a cofounder.</h3>
           <p>
-            Six hours of a machinist explaining his work becomes a written, searchable record of
-            every fix, every trick, and every reason they do it that way &mdash; in their own
-            words.
+            At a networking event in Newport Beach, California, Will pitched Journeyman to
+            <a class="inline-link" href="https://etok.me/" target="_blank" rel="noopener">Ethan Davidson</a>
+            &mdash; software engineer, formerly of Google, now building Wazoo. Ethan signed on as
+            cofounder, and now builds the AI that turns shop-floor talk into a written record.
           </p>
         </li>
         <li>
-          <h3>The plant keeps it forever.</h3>
+          <h3>Build something real.</h3>
           <p>
-            The knowledge belongs to the plant now &mdash; not to one person's memory, and not to
-            us.
+            No slideware, no someday: Journeyman captures real experts on real floors, and every
+            record belongs to the plant that paid for it. Wollack Systems grows one expert, one
+            plant, one honest conversation at a time.
           </p>
         </li>
       </ol>
     </div>
   </section>
 
-  <!-- Value -->
-  <section class="section section-tinted" id="value">
-    <div class="container">
-      <h2>What the plant gets back</h2>
-      <div class="grid-4">
-        <div class="card">
-          <h3>A written record</h3>
-          <p>Every fix, every trick, every reason &mdash; captured once, kept forever.</p>
-        </div>
-        <div class="card">
-          <h3>Faster hires</h3>
-          <p>A new hire learns in months what used to take years of standing around.</p>
-        </div>
-        <div class="card">
-          <h3>Answers at 2am</h3>
-          <p>Line goes down on third shift. They look it up. Nobody waits for Monday.</p>
-        </div>
-        <div class="card">
-          <h3>It outlives them</h3>
-          <p>Retirement stops being a knowledge catastrophe. The expertise stays.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section class="section" id="pricing">
+  <!-- The work -->
+  <section class="section" id="work">
     <div class="container pricing-wrap">
-      <h2>Simple to start</h2>
-      <p class="price-anchor"><strong>About $1,400 per expert captured.</strong></p>
+      <p class="eyebrow">The work</p>
+      <p class="price-anchor"><strong>Journeyman is the flagship.</strong></p>
       <p class="price-sub">
-        Less than one bad setup costs you. Every plant is different &mdash; a walkthrough gets you
-        a firm quote in days, not months.
-      </p>
-      <div class="cta-row cta-center">
-        <a class="btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request"
-          >Book a walkthrough</a
-        >
-      </div>
-    </div>
-  </section>
-
-  <!-- Teaser: Journeyman product -->
-  <section class="section section-tinted" id="journeyman">
-    <div class="container pricing-wrap">
-      <p class="eyebrow">Meet Journeyman</p>
-      <p class="price-anchor"><strong>Journeyman is the product that does this.</strong></p>
-      <p class="price-sub">
-        A Wollack Systems flagship &mdash; capturing the expertise of your best people before they
-        retire, and keeping it in a record your plant owns.
+        Wollack Systems records what your best people know &mdash; hands-free &mdash; and turns it
+        into a written, searchable record your plant owns. Journeyman is the product that does it.
       </p>
       <div class="cta-row cta-center">
         <a class="btn btn-ghost" href="/journeyman">See how Journeyman works</a>
@@ -173,13 +157,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container">
       <h2>The people who know how to run your plant<br />are retiring right now.</h2>
       <p class="section-close-ink">
-        One conversation tells you what capture would look like for your floor.
+        One conversation with Will tells you what capture would look like for your floor.
       </p>
       <div class="cta-row cta-center">
         <a class="btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request"
           >Book a walkthrough</a
         >
+        <a class="btn btn-ghost" href="https://etok.me/" target="_blank" rel="noopener"
+          >Meet the cofounder</a
+        >
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Page-scoped: inline text links inside step copy on the dark ground. */
+  .inline-link {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent-blue);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .inline-link:hover {
+    color: var(--color-accent-blue);
+  }
+</style>
