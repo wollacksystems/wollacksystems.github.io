@@ -7,13 +7,27 @@
  * `@context` so it renders as a standalone, valid script block.
  */
 
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
 const SITE_URL = 'https://wollacksystems.github.io';
+
+// Founder portrait: drop a photo at public/will-wollack.png and rebuild —
+// it then feeds both the /about hero plate and the Person schema below.
+// Anchored on the project cwd (where npm run build/dev always runs).
+// FOUNDER_PORTRAIT is root-relative so the <img> resolves in dev/preview
+// too; FOUNDER_PORTRAIT_ABSOLUTE is the canonical URL for JSON-LD.
+export const FOUNDER_PORTRAIT = existsSync(join(process.cwd(), 'public', 'will-wollack.png'))
+  ? '/will-wollack.png'
+  : null;
+export const FOUNDER_PORTRAIT_ABSOLUTE = FOUNDER_PORTRAIT ? `${SITE_URL}${FOUNDER_PORTRAIT}` : null;
 
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const PERSON_WILL_ID = `${SITE_URL}/#will-wollack`;
 export const PERSON_ETHAN_ID = `${SITE_URL}/#ethan-davidson`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const PRODUCT_JOURNEYMAN_ID = `${SITE_URL}/journeyman#product`;
+export const ABOUT_PAGE_ID = `${SITE_URL}/about#aboutpage`;
 
 /** The company. Referenced by `founder`, `publisher`, and `brand`. */
 export function organization() {
@@ -43,6 +57,7 @@ export function personWillWollack() {
     jobTitle: 'Founder',
     worksFor: { '@id': ORG_ID },
     email: 'willwollack@gmail.com',
+    ...(FOUNDER_PORTRAIT_ABSOLUTE ? { image: FOUNDER_PORTRAIT_ABSOLUTE } : {}),
     description:
       'Founder of Wollack Systems, capturing the expertise of experienced manufacturing operators before it retires with them.',
     knowsAbout: ['manufacturing', 'knowledge capture', 'apprenticeship', 'industrial maintenance'],
@@ -91,6 +106,20 @@ export function productJourneyman() {
   };
 }
 
+/** The /about page — an AboutPage whose subject is the founder. */
+export function aboutPage() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': ABOUT_PAGE_ID,
+    url: `${SITE_URL}/about`,
+    name: 'About Will Wollack — Wollack Systems',
+    about: { '@id': PERSON_WILL_ID },
+    publisher: { '@id': ORG_ID },
+    isPartOf: { '@id': WEBSITE_ID },
+  };
+}
+
 /** Home → Journeyman trail for the product page. */
 export function breadcrumbJourneyman() {
   return {
@@ -108,6 +137,28 @@ export function breadcrumbJourneyman() {
         position: 2,
         name: 'Journeyman',
         item: `${SITE_URL}/journeyman`,
+      },
+    ],
+  };
+}
+
+/** Home → About trail for the founder page. */
+export function breadcrumbAbout() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About',
+        item: `${SITE_URL}/about`,
       },
     ],
   };

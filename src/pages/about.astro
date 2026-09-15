@@ -1,0 +1,333 @@
+---
+// About page — Will Wollack, the expanded founder story (blue/cobalt theme).
+// The landing page compresses the story; this page expands it. Product
+// detail lives on /journeyman (the "Rust & Iron" variant page).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  organization,
+  personWillWollack,
+  aboutPage,
+  breadcrumbAbout,
+  FOUNDER_PORTRAIT,
+} from '../lib/schema';
+
+// FOUNDER_PORTRAIT is null until public/will-wollack.png exists; the hero
+// renders a typographic placeholder plate in the meantime.
+const portraitSrc = FOUNDER_PORTRAIT;
+---
+
+<BaseLayout
+  title="About Will Wollack — Wollack Systems"
+  description="Who is Will Wollack? The founder story: why he's building Wollack Systems, how networking and hustling landed cofounder Ethan Davidson, and why the mission can't wait."
+  path="/about"
+  jsonLd={[organization(), personWillWollack(), aboutPage(), breadcrumbAbout()]}
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">About Wollack Systems</p>
+        <h1>
+          The founder is a field man who decided the knowledge shouldn't die on schedule.
+        </h1>
+        <p class="lede">
+          Will Wollack didn't come to manufacturing through a spreadsheet. He came through the room
+          &mdash; trade events, shop tours, chamber mixers, cold handshakes &mdash; and kept hearing
+          the same sentence everywhere:
+          <strong>the knowledge that runs this plant is one retirement from gone.</strong>
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request"
+            >Book a walkthrough</a
+          >
+          <a class="btn btn-ghost" href="/journeyman">See what he's building</a>
+        </div>
+      </div>
+
+      <figure class="portrait-plate">
+        <div class="portrait-frame">
+          {
+            portraitSrc ? (
+              <img
+                class="portrait-img"
+                src={portraitSrc}
+                alt="Will Wollack, founder of Wollack Systems"
+                width="480"
+                height="600"
+                loading="eager"
+              />
+            ) : (
+              <div
+                class="portrait-placeholder"
+                role="img"
+                aria-label="Portrait of Will Wollack — photo forthcoming"
+              >
+                <span class="portrait-mark">&#9881;</span>
+                <span class="portrait-initials">W.&thinsp;W.</span>
+                <span class="portrait-slug">Photo forthcoming</span>
+              </div>
+            )
+          }
+        </div>
+        <figcaption class="portrait-caption">
+          <span class="portrait-name">Will Wollack</span>
+          <span class="portrait-role">Founder &mdash; Wollack Systems</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Who he is -->
+  <section class="section section-tinted" id="who">
+    <div class="container">
+      <h2>Who is Will Wollack?</h2>
+      <p class="lede">
+        Will Wollack is the founder of Wollack Systems and the voice of Journeyman. He builds the
+        old way: show up, network, hustle. Wherever the people who make things gather, he's in the
+        room &mdash; and he listens for the moment a plant manager mentions the repair nobody could
+        explain, or the machinist nobody can replace.
+      </p>
+      <p class="lede">
+        He isn't chasing software for its own sake. He's building something real: a permanent
+        record of the expertise that keeps American plants running, captured from the people who
+        hold it &mdash; while it can still be captured.
+      </p>
+      <div class="accent-callout">
+        <p>
+          He heard the problem in every room he ever pitched in. So he stopped pitching the problem
+          and started building the record.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why he's building it -->
+  <section class="section" id="why">
+    <div class="container">
+      <h2>Why he's building it</h2>
+      <p class="lede">
+        The mission is written into the company's bones: record what your best people know &mdash;
+        without asking them to touch a computer &mdash; so the plant keeps knowing what they knew,
+        after they're gone.
+      </p>
+      <div class="grid-3">
+        <div class="fact">
+          <div class="fact-number">&asymp;1/3</div>
+          <p>of US manufacturing workers are over 55 &mdash; and heading for the exit together.</p>
+        </div>
+        <div class="fact">
+          <div class="fact-number">800 yrs</div>
+          <p>
+            of trades, and the transfer method never changed: stand next to someone until you can
+            do it too.
+          </p>
+        </div>
+        <div class="fact">
+          <div class="fact-number">First time</div>
+          <p>
+            AI can finally learn from a recording of someone explaining their work. But it cannot
+            go get it. That part takes us.
+          </p>
+        </div>
+      </div>
+      <p class="section-close">
+        When the best troubleshooter on the floor retires, the line runs slower, scrap goes up
+        &mdash; and nobody can say why. The people who know are still alive and still reachable.
+        That won't last.
+      </p>
+    </div>
+  </section>
+
+  <!-- How it's being built -->
+  <section class="section section-tinted" id="how">
+    <div class="container">
+      <h2>How: hustle first, then the record.</h2>
+      <ol class="steps">
+        <li>
+          <h3>Show up. Pitch. Repeat.</h3>
+          <p>
+            Will does the unscalable thing on purpose &mdash; face to face. Networking events,
+            plant walkthroughs, conversations standing next to the machine. The pitch is one
+            sentence long: your best people are retiring, and what they know leaves with them
+            unless somebody writes it down.
+          </p>
+        </li>
+        <li>
+          <h3>One pitch found a cofounder.</h3>
+          <p>
+            At a networking event in Newport Beach, California, Will pitched Journeyman to
+            <a class="inline-link" href="https://etok.me/" target="_blank" rel="noopener">Ethan Davidson</a>
+            &mdash; software engineer, formerly of Google, now building Wazoo. Ethan signed on as
+            cofounder, and now builds the AI that turns shop-floor talk into a written record.
+          </p>
+        </li>
+        <li>
+          <h3>Build something real.</h3>
+          <p>
+            No slideware, no someday: Journeyman captures real experts on real floors, and every
+            record belongs to the plant that paid for it. Wollack Systems grows one expert, one
+            plant, one honest conversation at a time.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- The work -->
+  <section class="section" id="work">
+    <div class="container pricing-wrap">
+      <p class="eyebrow">The work</p>
+      <p class="price-anchor"><strong>Journeyman</strong></p>
+      <p class="price-sub">
+        Wollack Systems records what your best people know &mdash; hands-free &mdash; and turns it
+        into a written, searchable record your plant owns. Journeyman is the product that does it.
+      </p>
+      <div class="cta-row cta-center">
+        <a class="btn btn-ghost" href="/journeyman">See how Journeyman works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="section section-paper" id="book">
+    <div class="container">
+      <h2>Meet the man behind the mission.</h2>
+      <p class="section-close-ink">
+        One conversation with Will tells you what knowledge capture would look like for your floor.
+      </p>
+      <div class="cta-row cta-center">
+        <a class="btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request"
+          >Book a walkthrough</a
+        >
+        <a class="btn btn-ghost" href="https://etok.me/" target="_blank" rel="noopener"
+          >Meet the cofounder</a
+        >
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero portrait — the "document plate" motif: a framed plate on the dark
+     canvas, like the invoice card and the OG image composition. Hard corners,
+     hairline rules, blue reserved for the accent tick. */
+  .portrait-plate {
+    background: var(--color-surface-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    max-width: 420px;
+    justify-self: end;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .portrait-frame {
+    aspect-ratio: 4 / 5;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-subtle);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%) contrast(1.05);
+    transition: filter 0.25s ease;
+  }
+
+  /* Editorial reveal: color on hover, like a photo coming off the press. */
+  .portrait-plate:hover .portrait-img {
+    filter: none;
+  }
+
+  /* Typographic placeholder until a real photo lands. */
+  .portrait-placeholder {
+    display: grid;
+    place-items: center;
+    gap: 4px;
+    text-align: center;
+    padding: 24px;
+  }
+
+  .portrait-mark {
+    color: var(--color-accent-blue);
+    font-size: 1.4rem;
+  }
+
+  .portrait-initials {
+    font-family: var(--font-editorial);
+    font-size: 6rem;
+    line-height: 1;
+    color: var(--color-text-primary);
+  }
+
+  .portrait-slug {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: 10px;
+    margin-top: 12px;
+  }
+
+  .portrait-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 4px 2px;
+  }
+
+  .portrait-name {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+
+  /* The accent-rule motif from the pull quotes, shrunk to a tick. */
+  .portrait-name::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 3px;
+    background: var(--color-accent-blue);
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .portrait-role {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 820px) {
+    .portrait-plate {
+      justify-self: center;
+      width: 100%;
+      max-width: 380px;
+    }
+  }
+
+  /* Page-scoped: inline text links inside step copy on the dark ground. */
+  .inline-link {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent-blue);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .inline-link:hover {
+    color: var(--color-accent-blue);
+  }
+</style>

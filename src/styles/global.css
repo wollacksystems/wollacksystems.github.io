@@ -378,6 +378,19 @@ nav a:not(.btn):hover { color: var(--color-accent-blue); }
 
 .section-paper h2 { color: var(--color-ink-on-paper); }
 
+/* Ghost buttons on the paper band: the default white ghost fails contrast
+   on light paper — switch to ink on paper, and invert to an ink stamp on
+   hover (the accent-blue hover reserved for the dark ground). */
+.section-paper .btn-ghost {
+  border-color: var(--color-ink-on-paper);
+  color: var(--color-ink-on-paper);
+}
+.section-paper .btn-ghost:hover {
+  background: var(--color-ink-on-paper);
+  border-color: var(--color-ink-on-paper);
+  color: var(--color-paper);
+}
+
 .section-close-ink {
   max-width: 680px;
   margin: -12px auto 0;
