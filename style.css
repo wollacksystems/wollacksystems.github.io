@@ -395,6 +395,9 @@ nav a:not(.btn):hover { color: var(--color-accent-blue); }
 .footer-inner a { color: var(--color-text-primary); }
 .footer-inner a:hover { color: var(--color-accent-blue); }
 
+.github-link { display: inline-flex; align-items: center; }
+.github-icon { height: 1em; width: 1em; }
+
 /* Responsive */
 @media (max-width: 820px) {
   nav a:not(.btn) { display: none; }
