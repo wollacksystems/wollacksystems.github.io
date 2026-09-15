@@ -1,5 +1,9 @@
 /* Wollack Systems — Industrial Editorial
-   Tokens mirror DESIGN.md (the normative source). */
+   Tokens mirror DESIGN.md (the normative source).
+
+   The Journeyman "Rust & Iron" variant is folded in at the bottom as a
+   page-scoped token override ([data-theme="journeyman"]); the landing page
+   keeps the canonical slate + electric blue. */
 
 :root {
   /* Canvas & ground */
@@ -14,6 +18,7 @@
 
   /* Accent & structure */
   --color-accent-blue: #0084FF;
+  --color-accent-hover: #3399ff;
   --color-border-subtle: #2B2E35;
 
   /* Type */
@@ -93,6 +98,14 @@ a:focus-visible,
   color: var(--color-text-primary);
 }
 
+.brand a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+
 .brand-mark { color: var(--color-accent-blue); font-size: 1.2rem; }
 
 nav {
@@ -127,7 +140,7 @@ nav a:not(.btn):hover { color: var(--color-accent-blue); }
   background: var(--color-accent-blue);
   color: var(--color-ink-on-paper);
 }
-.btn-primary:hover { background: #3399ff; }
+.btn-primary:hover { background: var(--color-accent-hover); }
 
 .btn-ghost {
   border: 1px solid var(--color-text-primary);
@@ -263,13 +276,9 @@ nav a:not(.btn):hover { color: var(--color-accent-blue); }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 32px;
-  margin-bottom: 8px;
 }
 
-.fact {
-  text-align: center;
-  padding: 8px 12px;
-}
+.fact { text-align: center; }
 
 .fact-number {
   font-family: var(--font-editorial);
@@ -406,4 +415,33 @@ nav a:not(.btn):hover { color: var(--color-accent-blue); }
   .hero { padding-top: 56px; }
   .section { padding: 64px 0; }
   h2 { margin-bottom: 2rem; }
+}
+
+/* ---------------------------------------------------------------------------
+   Journeyman — "Rust & Iron" variant
+   Page-scoped override of the Industrial Editorial tokens (DESIGN.md).
+   Applies only when <body data-theme="journeyman">; the landing page keeps
+   the canonical slate + electric blue. Leans hot.
+   --------------------------------------------------------------------------- */
+
+[data-theme="journeyman"] {
+  /* Canvas & ground — pulled from cool charcoal toward warm iron */
+  --color-bg-primary: #16120E;
+  --color-surface-subtle: #221B14;
+  --color-paper: #F1E8DA;
+
+  /* Text */
+  --color-text-primary: #F6EFE6;
+  --color-text-secondary: #B9AC9C;
+  --color-ink-on-paper: #16120E;
+
+  /* Accent & structure — the sole saturated hue is now rust, not blue */
+  --color-accent-blue: #E25822;
+  --color-accent-hover: #f4652b;
+  --color-border-subtle: #33291F;
+}
+
+/* Header fits the warm ground instead of the charcoal one */
+[data-theme="journeyman"] .site-header {
+  background: rgba(22, 18, 14, 0.92);
 }

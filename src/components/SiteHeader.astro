@@ -1,0 +1,28 @@
+---
+// Shared header: gear brand mark + nav. Self-detects the Journeyman page from
+// the URL path, which adds the cross-page "Home" link and switches the
+// walkthrough mailto subject.
+const variant = Astro.url.pathname.startsWith('/journeyman') ? 'journeyman' : 'home';
+const walkthroughSubject =
+  variant === 'journeyman' ? 'Journeyman%20walkthrough%20request' : 'Walkthrough%20request';
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand">
+      <a href="/">
+        <span class="brand-mark">&#9881;</span>
+        <span class="brand-name">Wollack&nbsp;Systems</span>
+      </a>
+    </div>
+    <nav>
+      {variant === 'journeyman' && <a href="/">Home</a>}
+      <a href={variant === 'journeyman' ? '/journeyman#engage' : '/#how'}>How it works</a>
+      {variant !== 'journeyman' && <a href="/#value">What you get</a>}
+      <a href={variant === 'journeyman' ? '/journeyman#pricing' : '/#pricing'}>Pricing</a>
+      <a class="btn btn-small" href={`mailto:willwollack@gmail.com?subject=${walkthroughSubject}`}
+        >Book a walkthrough</a
+      >
+    </nav>
+  </div>
+</header>
