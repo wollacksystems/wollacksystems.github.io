@@ -1,5 +1,0 @@
-# Wollack Systems — https://wollacksystems.github.io
-User-agent: *
-Allow: /
-
-Sitemap: https://wollacksystems.github.io/sitemap-index.xml
