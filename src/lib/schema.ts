@@ -7,7 +7,17 @@
  * `@context` so it renders as a standalone, valid script block.
  */
 
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
 const SITE_URL = 'https://wollacksystems.github.io';
+
+// Founder portrait: drop a photo at public/will-wollack.png and rebuild —
+// it then feeds both the /about hero plate and the Person schema below.
+// Anchored on the project cwd (where npm run build/dev always runs).
+export const FOUNDER_PORTRAIT = existsSync(join(process.cwd(), 'public', 'will-wollack.png'))
+  ? `${SITE_URL}/will-wollack.png`
+  : null;
 
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const PERSON_WILL_ID = `${SITE_URL}/#will-wollack`;
@@ -44,6 +54,7 @@ export function personWillWollack() {
     jobTitle: 'Founder',
     worksFor: { '@id': ORG_ID },
     email: 'willwollack@gmail.com',
+    ...(FOUNDER_PORTRAIT ? { image: FOUNDER_PORTRAIT } : {}),
     description:
       'Founder of Wollack Systems, capturing the expertise of experienced manufacturing operators before it retires with them.',
     knowsAbout: ['manufacturing', 'knowledge capture', 'apprenticeship', 'industrial maintenance'],
