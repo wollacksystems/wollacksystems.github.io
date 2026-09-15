@@ -1,8 +1,8 @@
 # wollacksystems.github.io
 
-Marketing site for Wollack Systems — capturing manufacturing expertise before it retires.
+Marketing site for Wollack Systems, capturing manufacturing expertise before it retires.
 
-Records what experienced operators know — hands-free, body-worn cameras — and turns it into a permanent, searchable record the plant owns.
+Records what experienced operators know (hands-free, body-worn cameras) and turns it into a permanent, searchable record the plant owns.
 
 ## What's here
 
@@ -30,5 +30,5 @@ Deployed to GitHub Pages by CI: `.github/workflows/deploy.yml` builds the site o
 ## Brand voice
 
 - **Company:** Wollack Systems (the product work lives under the Journeyman name in the partnership).
-- **Terminology rule:** the people recorded are *experienced operators / senior technicians* — never "journeymen" in customer-facing copy.
+- **Terminology rule:** the people recorded are *experienced operators / senior technicians*, never "journeymen" in customer-facing copy.
 - Contact CTAs point at [willwollack@gmail.com](mailto:willwollack@gmail.com).

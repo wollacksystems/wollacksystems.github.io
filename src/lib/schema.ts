@@ -40,7 +40,7 @@ export function organization() {
     logo: `${SITE_URL}/logo.png`,
     image: `${SITE_URL}/logo.png`,
     description:
-      'Wollack Systems records what experienced manufacturing operators know — hands-free — and turns it into a permanent, searchable record the plant owns.',
+      'Wollack Systems records what experienced manufacturing operators know, hands-free, and turns it into a permanent, searchable record the plant owns.',
     email: 'willwollack@gmail.com',
     founder: { '@id': PERSON_WILL_ID },
     sameAs: ['https://github.com/wollacksystems'],
@@ -113,7 +113,7 @@ export function aboutPage() {
     '@type': 'AboutPage',
     '@id': ABOUT_PAGE_ID,
     url: `${SITE_URL}/about`,
-    name: 'About Will Wollack — Wollack Systems',
+    name: 'About Will Wollack, Wollack Systems',
     about: { '@id': PERSON_WILL_ID },
     publisher: { '@id': ORG_ID },
     isPartOf: { '@id': WEBSITE_ID },
