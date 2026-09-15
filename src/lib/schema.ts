@@ -14,6 +14,7 @@ export const PERSON_WILL_ID = `${SITE_URL}/#will-wollack`;
 export const PERSON_ETHAN_ID = `${SITE_URL}/#ethan-davidson`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const PRODUCT_JOURNEYMAN_ID = `${SITE_URL}/journeyman#product`;
+export const ABOUT_PAGE_ID = `${SITE_URL}/about#aboutpage`;
 
 /** The company. Referenced by `founder`, `publisher`, and `brand`. */
 export function organization() {
@@ -91,6 +92,20 @@ export function productJourneyman() {
   };
 }
 
+/** The /about page — an AboutPage whose subject is the founder. */
+export function aboutPage() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': ABOUT_PAGE_ID,
+    url: `${SITE_URL}/about`,
+    name: 'About Will Wollack — Wollack Systems',
+    about: { '@id': PERSON_WILL_ID },
+    publisher: { '@id': ORG_ID },
+    isPartOf: { '@id': WEBSITE_ID },
+  };
+}
+
 /** Home → Journeyman trail for the product page. */
 export function breadcrumbJourneyman() {
   return {
@@ -108,6 +123,28 @@ export function breadcrumbJourneyman() {
         position: 2,
         name: 'Journeyman',
         item: `${SITE_URL}/journeyman`,
+      },
+    ],
+  };
+}
+
+/** Home → About trail for the founder page. */
+export function breadcrumbAbout() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About',
+        item: `${SITE_URL}/about`,
       },
     ],
   };
