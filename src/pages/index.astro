@@ -4,11 +4,19 @@
 // Canonical slate + electric blue Industrial Editorial theme (see DESIGN.md).
 // Product detail lives on /journeyman (the "Rust & Iron" variant page).
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  organization,
+  personWillWollack,
+  personEthanDavidson,
+  webSite,
+} from '../lib/schema';
 ---
 
 <BaseLayout
   title="Wollack Systems — Capturing manufacturing expertise before it retires"
   description="Will Wollack is building Wollack Systems to record what America's best machinists know — hands-free — before it retires with them. Meet the founder, read the mission, book a walkthrough."
+  path="/"
+  jsonLd={[organization(), personWillWollack(), personEthanDavidson(), webSite()]}
 >
   <section class="hero">
     <div class="container hero-grid">

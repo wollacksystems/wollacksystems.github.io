@@ -2,18 +2,30 @@
 // Shared shell for every page: fonts, meta, header, footer.
 // Per-page theme variants (e.g. Journeyman's "Rust & Iron") ride on `theme`,
 // which becomes <body data-theme="...">.
+// SEO (issue #9): canonical URL, Open Graph/Twitter cards, and per-page
+// JSON-LD entities via `jsonLd`. Description is shared by the meta tag,
+// og:description, and twitter:description so they can't drift.
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import JsonLd from '../components/JsonLd.astro';
 
 interface Props {
   title: string;
   description: string;
   /** Page-scoped token-override theme, e.g. "journeyman". */
   theme?: string;
+  /** Path portion of the page URL, e.g. "/journeyman"; "/" for the home page. */
+  path?: string;
+  /** schema.org entities to emit as JSON-LD script blocks. */
+  jsonLd?: Record<string, unknown>[];
 }
 
-const { title, description, theme } = Astro.props;
+const { title, description, theme, path = '/', jsonLd = [] } = Astro.props;
+
+const SITE_URL = Astro.site?.origin ?? 'https://wollacksystems.github.io';
+const canonicalUrl = new URL(path, Astro.site).href;
+const ogImage = `${SITE_URL}/og-image.png`;
 ---
 
 <!doctype html>
@@ -23,18 +35,33 @@ const { title, description, theme } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#121316" />
+
+    <meta property="og:site_name" content="Wollack Systems" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128296;</text></svg>"
     />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#121316" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap"
     />
+    <JsonLd entities={jsonLd} />
   </head>
   <body data-theme={theme}>
     <SiteHeader />

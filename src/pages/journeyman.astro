@@ -3,12 +3,15 @@
 // design system (see DESIGN.md). The theme override rides on
 // <body data-theme="journeyman"> via BaseLayout.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
 ---
 
 <BaseLayout
   title="Journeyman — A Wollack Systems product"
   description="Journeyman records how your most experienced operators do their work and turns it into a written, searchable record your plant owns and can train from."
   theme="journeyman"
+  path="/journeyman"
+  jsonLd={[productJourneyman(), breadcrumbJourneyman()]}
 >
   <section class="hero">
     <div class="container hero-grid">

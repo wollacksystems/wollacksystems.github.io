@@ -1,0 +1,14 @@
+---
+// Renders one JSON-LD script block per structured-data entity (issue #9).
+// `set:html={JSON.stringify(...)}` is the documented Astro pattern: the JSON
+// is safe to embed as-is because JSON.stringify escapes `<` as `\u003c`.
+interface Props {
+  entities: Record<string, unknown>[];
+}
+const { entities } = Astro.props as Props;
+// Serialize in the frontmatter — generic type annotations can't appear in
+// template expressions (the parser reads them as JSX elements).
+const scripts = entities.map((entity) => JSON.stringify(entity));
+---
+
+{scripts.map((json) => <script is:inline type="application/ld+json" set:html={json} />)}
