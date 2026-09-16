@@ -11,6 +11,7 @@ Records what experienced operators know (hands-free, body-worn cameras) and turn
 - `src/layouts/BaseLayout.astro` + `src/components/` — the shared shell (head/fonts, header, footer) every page composes
 - `src/styles/global.css` — the design system; tokens mirror `DESIGN.md` (the normative spec), with the Journeyman variant folded in as a page-scoped override
 - `DESIGN.md` — the design system spec (palette, typography, layout, components)
+- `FEATURES.md` — the feature map: what each feature does, where it lives, and how to verify it
 
 Built with [Astro](https://astro.build) (TypeScript, static output): no client-side JS, no dependencies beyond the webfonts (Instrument Serif, Inter, JetBrains Mono).
 
