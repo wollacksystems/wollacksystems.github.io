@@ -22,6 +22,14 @@ export const FOUNDER_PORTRAIT = existsSync(join(process.cwd(), 'public', 'will-w
   : null;
 export const FOUNDER_PORTRAIT_ABSOLUTE = FOUNDER_PORTRAIT ? `${SITE_URL}${FOUNDER_PORTRAIT}` : null;
 
+// Cofounder portrait: same drop-in convention as the founder's.
+export const COFOUNDER_PORTRAIT = existsSync(join(process.cwd(), 'public', 'ethan-davidson.png'))
+  ? '/ethan-davidson.png'
+  : null;
+export const COFOUNDER_PORTRAIT_ABSOLUTE = COFOUNDER_PORTRAIT
+  ? `${SITE_URL}${COFOUNDER_PORTRAIT}`
+  : null;
+
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const PERSON_WILL_ID = `${SITE_URL}/#will-wollack`;
 export const PERSON_ETHAN_ID = `${SITE_URL}/#ethan-davidson`;
@@ -76,6 +84,7 @@ export function personEthanDavidson() {
     worksFor: { '@id': ORG_ID },
     url: 'https://etok.me/',
     sameAs: ['https://github.com/EthanThatOneKid'],
+    ...(COFOUNDER_PORTRAIT_ABSOLUTE ? { image: COFOUNDER_PORTRAIT_ABSOLUTE } : {}),
   };
 }
 

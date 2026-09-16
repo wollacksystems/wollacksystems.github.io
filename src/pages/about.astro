@@ -9,11 +9,14 @@ import {
   aboutPage,
   breadcrumbAbout,
   FOUNDER_PORTRAIT,
+  COFOUNDER_PORTRAIT,
 } from '../lib/schema';
 
 // FOUNDER_PORTRAIT is null until public/will-wollack.png exists; the hero
-// renders a typographic placeholder plate in the meantime.
+// renders a typographic placeholder plate in the meantime. COFOUNDER_PORTRAIT
+// follows the same drop-in convention (public/ethan-davidson.png).
 const portraitSrc = FOUNDER_PORTRAIT;
+const cofounderSrc = COFOUNDER_PORTRAIT;
 ---
 
 <BaseLayout
@@ -150,14 +153,33 @@ const portraitSrc = FOUNDER_PORTRAIT;
             unless somebody writes it down.
           </p>
         </li>
-        <li>
-          <h3>One pitch found a cofounder.</h3>
-          <p>
-            At a networking event in Newport Beach, California, Will pitched Journeyman to
-            <a class="inline-link" href="https://etok.me/" target="_blank" rel="noopener">Ethan Davidson</a>,
-            a software engineer formerly of Google and now building Wazoo. Ethan signed on as
-            cofounder, and now builds the AI that turns shop-floor talk into a written record.
-          </p>
+        <li class="step-with-portrait">
+          <div class="step-copy">
+            <h3>One pitch found a cofounder.</h3>
+            <p>
+              At a networking event in Newport Beach, California, Will pitched Journeyman to
+              <a class="inline-link" href="https://etok.me/" target="_blank" rel="noopener">Ethan Davidson</a>,
+              a software engineer formerly of Google and now building Wazoo. Ethan signed on as
+              cofounder, and now builds the AI that turns shop-floor talk into a written record.
+            </p>
+          </div>
+          {
+            cofounderSrc && (
+              <figure class="cofounder-plate">
+                <img
+                  class="cofounder-img"
+                  src={cofounderSrc}
+                  alt="Ethan Davidson, cofounder of Wollack Systems"
+                  width="240"
+                  loading="lazy"
+                />
+                <figcaption class="cofounder-caption">
+                  <span class="cofounder-name">Ethan Davidson</span>
+                  <span class="cofounder-role">Cofounder, Wollack Systems</span>
+                </figcaption>
+              </figure>
+            )
+          }
         </li>
         <li>
           <h3>Build something real.</h3>
@@ -327,5 +349,79 @@ const portraitSrc = FOUNDER_PORTRAIT;
   }
   .inline-link:hover {
     color: var(--color-accent-blue);
+  }
+
+  /* Cofounder portrait beside the step copy: a smaller cousin of the hero
+     plate, same frame language. The source image is 600x901, so the frame
+     keeps a 2:3 aspect and crops with object-fit: cover. */
+  .step-with-portrait {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 700px) {
+    .step-with-portrait {
+      grid-template-columns: 1fr 220px;
+      align-items: start;
+    }
+  }
+
+  .cofounder-plate {
+    background: var(--color-surface-subtle);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 10px;
+    max-width: 220px;
+    justify-self: end;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  }
+
+  .cofounder-img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    filter: grayscale(100%) contrast(1.05);
+    transition: filter 0.25s ease;
+  }
+
+  .cofounder-plate:hover .cofounder-img {
+    filter: none;
+  }
+
+  .cofounder-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 2px 2px;
+  }
+
+  .cofounder-name {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+  }
+
+  .cofounder-name::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 3px;
+    background: var(--color-accent-blue);
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .cofounder-role {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
   }
 </style>
