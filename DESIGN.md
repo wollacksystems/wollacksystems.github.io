@@ -192,8 +192,9 @@ A refined editorial serif carries voice; a functional grotesque carries data.
 Depth is expressed through value shifts, not shadows. Elevated surfaces move
 one step from Primary (#121316) to Surface Subtle (#1E2024). Drop shadows are
 avoided entirely; where separation is needed, a `1px` divider does the work.
-The Paper invoice panel is the one intentional exception — it may carry a soft
-ambient shadow to read as a physical document resting on the page.
+Two intentional exceptions read as physical objects resting on the page: the
+Paper invoice panel and the portrait plates, which carry a soft ambient
+shadow to sit like mounted photographs.
 
 ## Shapes
 
@@ -218,6 +219,19 @@ accent bar on callouts.
   uppercase slate headers, white cells, hover tint via Surface Subtle.
 - **invoice-panel:** Warm paper receipt motif (the "$10,000 itemized" story)
   rendered as a light document on the dark canvas.
+- **portrait-plate:** Framed monochrome portrait with a mono caption, used for
+  people on the about page. The frame is a Surface Subtle plate with a 1px
+  border, `radius-sm`, and a square 1:1 image window; `object-fit: cover`
+  crops any source shape top-anchored so faces survive. Images render
+  grayscale (`contrast(1.05)`) and reveal full color on plate hover. The
+  caption is the eyebrow style: JetBrains Mono, uppercase, +0.12em tracking,
+  name in white with a 14–18px blue accent tick, role in Secondary slate.
+  Two accepted sizes: the hero plate (about 380px wide, right column of the
+  about hero; collapses to full-width, max 380px, below 820px) and the step
+  plate (180px, right-aligned beside step copy at 700px and up; centers at
+  220px in the single-column layout below). When a portrait file is absent,
+  the hero falls back to a typographic placeholder with the same frame (see
+  `FEATURES.md`, drop-in portraits).
 
 ## Do's and Don'ts
 
@@ -228,6 +242,7 @@ Do use dividers before cards; wrap only when grouping truly demands it.
 
 Don't introduce additional hues; the palette is charcoal, slate, bone, white,
 and exactly one blue.
-Don't round corners past `2px` or add decorative drop shadows.
+Don't round corners past `2px` or add drop shadows beyond the two accepted
+physical-object exceptions above.
 Don't set body copy wider than ~65ch or pair Electric Blue with Paper — blue
 text belongs exclusively on the charcoal ground.
