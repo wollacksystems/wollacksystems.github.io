@@ -54,7 +54,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
                 class="portrait-img"
                 src={portraitSrc}
                 alt="Will Wollack, founder of Wollack Systems"
-                width="480"
+                width="600"
                 height="600"
                 loading="eager"
               />
@@ -171,7 +171,6 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
                   src={cofounderSrc}
                   alt="Ethan Davidson, cofounder of Wollack Systems"
                   width="240"
-                  loading="lazy"
                 />
                 <figcaption class="cofounder-caption">
                   <span class="cofounder-name">Ethan Davidson</span>
@@ -241,7 +240,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
   }
 
   .portrait-frame {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
     background: var(--color-bg-primary);
     border: 1px solid var(--color-border-subtle);
     display: grid;
@@ -352,9 +351,9 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
   }
 
   /* Cofounder portrait beside the step copy: a smaller cousin of the hero
-     plate, same frame language. The source image is 600x901, so the frame
-     keeps a 2:3 aspect and crops with object-fit: cover. The plate is
-     center-anchored against the text block so the step reads as one unit. */
+     plate, same frame language. Both portraits render square (1:1); the
+     CSS aspect-ratio crops whatever the source's native shape is via
+     object-fit: cover, top-anchored so faces survive the crop. */
   .step-with-portrait {
     display: grid;
     grid-template-columns: 1fr;
@@ -390,7 +389,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
 
   .cofounder-img {
     width: 100%;
-    aspect-ratio: 2 / 3;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: top;
     display: block;
