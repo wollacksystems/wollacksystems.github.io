@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -20,24 +21,36 @@
         <span class="brand-mark">&#9881;</span>
         <span class="brand-name">Wollack&nbsp;Systems</span>
       </div>
-      <nav>
-        <a href="journeyman.html">Journeyman</a>
-        <a href="#how">How it works</a>
-        <a href="#value">What you get</a>
-        <a href="#pricing">Pricing</a>
-        <a class="btn btn-small" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request">Book a walkthrough</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <div class="desktop-nav-links">
+          <a href="journeyman.html">Journeyman</a>
+          <a href="#how">How it works</a>
+          <a href="#value">What you get</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+        <a class="btn btn-small nav-cta" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request">Book a walkthrough</a>
+        <details class="mobile-nav">
+          <summary>Menu</summary>
+          <div class="mobile-nav-links">
+            <a href="journeyman.html">Journeyman</a>
+            <a href="#how">How it works</a>
+            <a href="#value">What you get</a>
+            <a href="#pricing">Pricing</a>
+            <a class="mobile-nav-cta btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request">Book a walkthrough</a>
+          </div>
+        </details>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
 
     <!-- Hero -->
-    <section class="hero">
+    <section class="hero" aria-labelledby="home-title">
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">Knowledge capture for American manufacturing</p>
-          <h1>The machine is down. Nobody on the floor can fix it.</h1>
+          <h1 id="home-title">The machine is down. Nobody on the floor can fix it.</h1>
           <p class="lede">
             So they call back a man who retired six years ago. He listens.
             Puts his ear to the housing. Taps it once, with a small hammer.
