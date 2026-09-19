@@ -15,22 +15,46 @@ const walkthroughSubject =
         <span class="brand-name">Wollack&nbsp;Systems</span>
       </a>
     </div>
-    <nav>
-      {variant === 'journeyman' ? (
-        <>
-          <a href="/">Home</a>
-          <a href="/journeyman#engage">How it works</a>
-          <a href="/journeyman#pricing">Pricing</a>
-        </>
-      ) : (
-        <>
-          <a href="/journeyman">Journeyman</a>
-          <a href="/#mission">Why</a>
-          <a href="/#how">How</a>
-          <a href="/about">About</a>
-        </>
-      )}
-      <a class="btn btn-small" href={`mailto:willwollack@gmail.com?subject=${walkthroughSubject}`}
+    <nav class="site-nav" aria-label="Primary navigation">
+      <div class="desktop-nav-links">
+        {variant === 'journeyman' ? (
+          <>
+            <a href="/">Home</a>
+            <a href="/journeyman#engage">How it works</a>
+            <a href="/journeyman#pricing">Pricing</a>
+          </>
+        ) : (
+          <>
+            <a href="/journeyman">Journeyman</a>
+            <a href="/#mission">Why</a>
+            <a href="/#how">How</a>
+            <a href="/about">About</a>
+          </>
+        )}
+      </div>
+      <details class="mobile-nav">
+        <summary>Menu</summary>
+        <div class="mobile-nav-links">
+          {variant === 'journeyman' ? (
+            <>
+              <a href="/">Home</a>
+              <a href="/journeyman#engage">How it works</a>
+              <a href="/journeyman#pricing">Pricing</a>
+            </>
+          ) : (
+            <>
+              <a href="/journeyman">Journeyman</a>
+              <a href="/#mission">Why</a>
+              <a href="/#how">How</a>
+              <a href="/about">About</a>
+            </>
+          )}
+          <a class="mobile-nav-cta" href={`mailto:willwollack@gmail.com?subject=${walkthroughSubject}`}
+            >Book a walkthrough</a
+          >
+        </div>
+      </details>
+      <a class="btn btn-small nav-cta" href={`mailto:willwollack@gmail.com?subject=${walkthroughSubject}`}
         >Book a walkthrough</a
       >
     </nav>
