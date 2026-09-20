@@ -40,6 +40,12 @@ jobs:
       - name: Copy spacing guard
         run: npm run check:copy
 
+      # The askable-library demo is wired by ids in markup and is sold as a
+      # scripted, offline sample: a broken pair or a stray fetch builds and
+      # renders fine, and clicking a question does nothing.
+      - name: Demo guard
+        run: npm run check:demo
+
       # The palette's contrast pairs, which no type-check or build can see: a
       # text color equal to its surface renders "fine" and invisible.
       - name: Contrast guard

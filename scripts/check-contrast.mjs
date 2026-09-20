@@ -27,6 +27,9 @@ const PAIRS = [
   ['paper surfaces (invoice, CTA band)', '--color-ink-on-paper', '--color-paper', AA_NORMAL],
   ['muted ink on paper (labels, captions)', '--color-ink-on-paper-muted', '--color-paper', AA_NORMAL],
   ['display type on the dark ground', '--color-text-primary', '--color-bg-primary', AA_LARGE],
+  // Non-text UI: the askable-library demo's scrub fill against its track, the
+  // pair that shows where in the recorded session an answer came from.
+  ['demo scrub fill against its track', '--color-accent-blue', '--color-border-subtle', AA_LARGE],
 ];
 
 /**

@@ -3,6 +3,7 @@
 // design system (see DESIGN.md). The theme override rides on
 // <body data-theme="journeyman"> via BaseLayout.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AskLibraryDemo from '../components/AskLibraryDemo.astro';
 import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
 ---
 
@@ -88,28 +89,20 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
   </section>
 
   <!-- The library: the flagship surface, so it lands here, right after what
-       the product is. Amounts and named-user counts stay unquoted: Part 1 of
-       the Knowledge Capture Agreement leaves them to the quote. -->
+       the product is — and the demo is the proof of the claim above it. The
+       demo answers from a scripted sample corpus with no network and no model
+       (src/lib/library-demo.ts), so the section's three claims are shown
+       rather than described: ask it in plain language, every answer names the
+       segment it came from, and the panel wears the plant's name. Amounts and
+       named-user counts stay unquoted: Part 1 of the Knowledge Capture
+       Agreement leaves them to the quote. -->
   <section class="section" id="library">
     <div class="container">
       <h2>Ask the plant.</h2>
       <p class="section-close">
         Not a document you file. A library you can ask.
       </p>
-      <div class="grid-3">
-        <div class="card">
-          <h3>Ask it like a person</h3>
-          <p>"How did we fix this last time?" Plain language in, an answer from your own library out.</p>
-        </div>
-        <div class="card">
-          <h3>Every answer shows its source</h3>
-          <p>Each one links back to the moment in the recording it came from. Watch it, or check it.</p>
-        </div>
-        <div class="card">
-          <h3>Skinned as yours</h3>
-          <p>Your name, your logo, on the interface — it looks made for your floor.</p>
-        </div>
-      </div>
+      <AskLibraryDemo />
       <div class="accent-callout">
         <p>
           Your library travels through your own tunnel into the platform — and that tunnel reaches

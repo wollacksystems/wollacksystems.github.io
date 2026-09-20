@@ -11,6 +11,7 @@
     "build": "astro build",
     "check": "astro check",
     "check:copy": "node scripts/check-inline-spacing.mjs",
+    "check:demo": "node scripts/check-demo.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
     "check:language": "node scripts/check-language.mjs",
     "preview": "astro preview",

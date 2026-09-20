@@ -254,6 +254,34 @@ accent bar on callouts.
   uppercase slate headers, white cells, hover tint via Surface Subtle.
 - **invoice-panel:** Warm paper receipt motif (the "$10,000 itemized" story)
   rendered as a light document on the dark canvas.
+- **ask-console:** the askable-library demo on `/journeyman` — the one
+  interactive surface. A Surface Subtle panel with a hairline border and no
+  shadow, opened by a mono bar (`JOURNEYMAN` / `MACHINING CELL · VMC-04` /
+  status) over a text input on the Primary ground and a grid of question chips.
+  Chips are quiet buttons: Secondary slate on the console, Primary slate and an
+  accent border on hover, 44px minimum height, `radius-sm`. The input is a
+  token pair, not a new fill — Primary ground, hairline border, Primary ink —
+  with the accent as its focus outline.
+- **answer-slip:** the demo's answer, back on Paper: the question in mono at
+  `--color-ink-on-paper-muted`, the answer in Inter at Primary ink, then a
+  dashed rule (`--color-border-subtle`, the token rather than the invoice's
+  literal, so the warm ground gets a warm hairline) over a 4px segment scrub —
+  `--color-border-subtle` track with an accent fill, measured at 3.7:1 on
+  `/:root` and 3.8:1 on `/journeyman` against the 3:1 non-text floor — and the
+  source stamp: `FROM SEG 12 · 14:32` in ink over the segment's duration, job,
+  recorded role, and machine in muted ink.
+- **ask-miss:** when nothing in the sample fits, the console answers on its own
+  ground instead of a slip: a 3px accent rule with the question in Instrument
+  Serif and the explanation in Secondary slate. It never invents an answer, and
+  it never claims the sample is the product.
+- **Demo states:** default (the first question, its answer, and its source are
+  server-rendered, so the panel reads with JavaScript off), answering (the mono
+  status line reads `Searching the index…`), retrieved (one slip shown, chips
+  and the status line unchanged otherwise), and miss. The scripted beat before
+  an answer is skipped when the OS asks for reduced motion, and only one script
+  ships, inlined into that page (~2.5KB, no second copy of the answers: the
+  retrieval is `src/lib/retrieval.ts`, the corpus is markup); it must stay
+  offline and scripted.
 - **portrait-plate:** Framed monochrome portrait with a mono caption, used for
   people on the about page. The frame is a Surface Subtle plate with a 1px
   border, `radius-sm`, and a square 1:1 image window; `object-fit: cover`
@@ -309,6 +337,9 @@ Do use dividers before cards; wrap only when grouping truly demands it.
 
 Don't introduce additional hues; the palette is charcoal, slate, bone, white,
 and exactly one blue.
+Don't let the askable-library demo go online, generate its answers, or wear
+invented customers: it answers from a fixed sample corpus, offline, and the page
+says so.
 Don't add a second brand mark, redraw the mark per surface, or give it a
 transparent-padded, re-cropped, or stretched variant: the three renderings in
 Brand mark are the whole system.
