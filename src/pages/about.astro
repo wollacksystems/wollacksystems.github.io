@@ -1,6 +1,9 @@
 ---
-// About page — Will Wollack, the expanded founder story (blue/cobalt theme).
-// The landing page compresses the story; this page expands it. Product
+// About page — the founder behind the company (blue/cobalt theme).
+//
+// Each beat of the story is told once. The landing page owns the origin and the
+// pitch ("One pitch found a cofounder"); this page carries only what the landing
+// page doesn't: what Will listens for, and who writes the record down. Product
 // detail lives on /journeyman (the "Rust & Iron" variant page).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {
@@ -22,7 +25,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
 
 <BaseLayout
   title="About Will Wollack, Wollack Systems"
-  description="Who is Will Wollack? The founder story: why he's building Wollack Systems, how networking and hustling landed cofounder Ethan Davidson, and why the mission can't wait."
+  description="What Will Wollack listens for in every room, and the engineer who writes the record down. The founder and cofounder behind Wollack Systems."
   path="/about"
   jsonLd={[organization(), personWillWollack(), personEthanDavidson(), aboutPage(), breadcrumbAbout()]}
 >
@@ -31,19 +34,18 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
       <div class="hero-copy">
         <p class="eyebrow">About Wollack Systems</p>
         <h1>
-          The founder is a field man who decided the knowledge shouldn't die on schedule.
+          The founder came up in the field and decided the knowledge shouldn't die on schedule.
         </h1>
         <p class="lede">
-          Will Wollack didn't come to manufacturing through a spreadsheet. He came through the
-          room: trade events, shop tours, chamber mixers, cold handshakes. And he kept hearing the
-          same sentence everywhere:
-          <strong>the knowledge that runs this plant is one retirement from gone.</strong>
+          Will Wollack came to manufacturing through the room, not a spreadsheet: trade events, shop
+          tours, cold handshakes. That is still the method: every pitch in person, every walkthrough
+          on the floor.
         </p>
         <div class="cta-row">
           <a class="btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request"
             >Book a walkthrough</a
           >
-          <a class="btn btn-ghost" href="/journeyman/">See what he's building</a>
+          <a class="btn btn-ghost" href="/journeyman/">See what's being built</a>
         </div>
       </div>
 
@@ -80,130 +82,53 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
     </div>
   </section>
 
-  <!-- Who he is -->
+  <!-- What Will listens for -->
   <section class="section section-tinted" id="who">
     <div class="container">
-      <h2>Who is Will Wollack?</h2>
+      <h2>What Will listens for.</h2>
       <p class="lede">
-        Will Wollack is the founder of Wollack Systems and the voice of Journeyman. He builds the
-        old way: show up, network, hustle. Wherever the people who make things gather, he's in the
-        room, listening for the moment a plant manager mentions the repair nobody could explain,
-        or the machinist nobody can replace.
-      </p>
-      <p class="lede">
-        He's building a permanent record of the expertise that keeps American plants running,
-        captured from the people who hold it while it can still be captured.
+        Will listens first. Every room has two things worth hearing: the repair nobody could explain,
+        and the machinist nobody can replace.
       </p>
       <div class="accent-callout">
         <p>
-          He heard the problem in every room he ever pitched in. So he stopped pitching the problem
-          and started building the record.
+          The same problem showed up in every room. So Will stopped pitching it and started building
+          the record.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Why he's building it -->
-  <section class="section" id="why">
+  <!-- Who writes it down: what the pitch found, which the landing page only names. -->
+  <section class="section" id="team">
     <div class="container">
-      <h2>Why he's building it</h2>
-      <p class="lede">
-        The mission is written into the company's bones: record what your best people know,
-        without asking them to touch a computer, so the plant keeps knowing what they knew, after
-        they're gone.
-      </p>
-      <div class="grid-3">
-        <div class="fact">
-          <div class="fact-number">&asymp;1/3</div>
-          <p>of US manufacturing workers are over 55, and they're heading for the exit together.</p>
-        </div>
-        <div class="fact">
-          <div class="fact-number">800 yrs</div>
+      <h2>Who writes it down.</h2>
+      <div class="split-with-plate">
+        <div>
+          <p class="lede">Will finds the rooms and runs the capture. Ethan builds the platform.</p>
           <p>
-            of trades, and the transfer method never changed: stand next to someone until you can
-            do it too.
+            Ethan Davidson, a software engineer formerly of Google, is the engineering half of
+            Wollack Systems and the builder of Journeyman. Neither half works alone: someone has to
+            stand in the room, and someone has to write down what the room knows.
           </p>
         </div>
-        <div class="fact">
-          <div class="fact-number">First time</div>
-          <p>
-            AI can finally learn from a recording of someone explaining their work. But it cannot
-            go get it. That part takes us.
-          </p>
-        </div>
-      </div>
-      <p class="section-close">
-        When the best troubleshooter on the floor retires, the line runs slower, scrap goes up,
-        and nobody can say why. The people who know are still alive and still reachable, but not
-        for long.
-      </p>
-    </div>
-  </section>
-
-  <!-- How it's being built -->
-  <section class="section section-tinted" id="how">
-    <div class="container">
-      <h2>How: hustle first, then the record.</h2>
-      <ol class="steps">
-        <li>
-          <h3>Show up. Pitch. Repeat.</h3>
-          <p>
-            Selling face to face doesn't scale, and Will does it on purpose. Networking events,
-            plant walkthroughs, conversations standing next to the machine. The pitch is one
-            sentence long: your best people are retiring, and what they know leaves with them
-            unless somebody writes it down.
-          </p>
-        </li>
-        <li class="step-with-portrait">
-          <div class="step-copy">
-            <h3>One pitch found a cofounder.</h3>
-            <p>
-              At a networking event in Newport Beach, California, Will pitched Journeyman to
-              <a class="inline-link" href="https://etok.me/" target="_blank" rel="noopener">Ethan Davidson</a>,
-              a software engineer formerly of Google and now building Wazoo. Ethan signed on as
-              cofounder, and now builds the AI that turns shop-floor talk into a written record.
-            </p>
-          </div>
-          {
-            cofounderSrc && (
-              <figure class="cofounder-plate">
-                <img
-                  class="cofounder-img"
-                  src={cofounderSrc}
-                  alt="Ethan Davidson, cofounder of Wollack Systems"
-                  width="240"
-                  height="240"
-                />
-                <figcaption class="cofounder-caption">
-                  <span class="cofounder-name">Ethan Davidson</span>
-                  <span class="cofounder-role">Cofounder, Wollack Systems</span>
-                </figcaption>
-              </figure>
-            )
-          }
-        </li>
-        <li>
-          <h3>Build something real.</h3>
-          <p>
-            Journeyman captures real experts on real floors, and every record belongs to the plant
-            that paid for it. Wollack Systems grows one expert and one plant at a time.
-          </p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- The work -->
-  <section class="section" id="work">
-    <div class="container pricing-wrap">
-      <p class="eyebrow">The work</p>
-      <p class="price-anchor"><strong>Journeyman</strong></p>
-      <p class="price-sub">
-        Wollack Systems records what your best people know, hands-free, and turns it into a
-        written, searchable record your plant owns. Journeyman is the product that does it.
-      </p>
-      <div class="cta-row cta-center">
-        <a class="btn btn-ghost" href="/journeyman/">See how Journeyman works</a>
+        {
+          cofounderSrc && (
+            <figure class="cofounder-plate">
+              <img
+                class="cofounder-img"
+                src={cofounderSrc}
+                alt="Ethan Davidson, cofounder of Wollack Systems"
+                width="240"
+                height="240"
+              />
+              <figcaption class="cofounder-caption">
+                <span class="cofounder-name">Ethan Davidson</span>
+                <span class="cofounder-role">Cofounder, Wollack Systems</span>
+              </figcaption>
+            </figure>
+          )
+        }
       </div>
     </div>
   </section>
@@ -211,9 +136,9 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
   <!-- Final CTA -->
   <section class="section section-paper" id="book">
     <div class="container">
-      <h2>Meet the man behind the mission.</h2>
+      <h2>Start with the operator you can't afford to lose.</h2>
       <p class="section-close-ink">
-        One conversation with Will tells you what knowledge capture would look like for your floor.
+        Tell us who it is. We'll tell you what recording them takes.
       </p>
       <div class="cta-row cta-center">
         <a class="btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request"
@@ -340,29 +265,22 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
     }
   }
 
-  /* Page-scoped: inline text links inside step copy on the dark ground. */
-  .inline-link {
-    color: var(--color-text-primary);
-    text-decoration: underline;
-    text-decoration-color: var(--color-accent-blue);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-  .inline-link:hover {
-    color: var(--color-accent-blue);
-  }
-
-  /* Cofounder portrait beside the step copy: a smaller cousin of the hero
+  /* Cofounder portrait beside the team copy: a smaller cousin of the hero
      plate, same frame language. Both portraits render square (1:1); the
      CSS aspect-ratio crops whatever the source's native shape is via
      object-fit: cover, top-anchored so faces survive the crop. */
-  .step-with-portrait {
+  .split-with-plate {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  /* Below 700px the step is a single column, so the plate centers and
+  /* First paragraph of the split carries the sentence that lands it. */
+  .split-with-plate .lede {
+    margin-bottom: 14px;
+  }
+
+  /* Below 700px the split is a single column, so the plate centers and
      grows slightly, matching the hero plate's narrow-viewport behavior.
      The 700px override for the two-column layout sits after the base
      plate rule; source order decides the cascade at equal specificity. */
@@ -377,7 +295,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
   }
 
   @media (min-width: 700px) {
-    .step-with-portrait {
+    .split-with-plate {
       grid-template-columns: 1fr 180px;
       align-items: center;
       column-gap: 32px;
@@ -411,6 +329,10 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
     padding: 8px 2px 2px;
   }
 
+  /* The caption is a fixed 180px plate at 700px and up (see DESIGN.md), and
+     upper-case mono with tracking overflows it: "COFOUNDER, WOLLACK SYSTEMS"
+     runs ~180px inside a 163px box. So the caption wraps like the hero
+     plate's does rather than pushing text past the frame. */
   .cofounder-name {
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -418,7 +340,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-text-primary);
-    white-space: nowrap;
+    text-wrap: pretty;
   }
 
   .cofounder-name::before {
@@ -437,6 +359,6 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
-    white-space: nowrap;
+    text-wrap: pretty;
   }
 </style>

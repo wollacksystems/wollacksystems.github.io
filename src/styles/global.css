@@ -15,6 +15,10 @@
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #9EABB7;
   --color-ink-on-paper: #121316;
+  /* Secondary ink for captions, labels, and footnotes on Paper surfaces.
+     At 0.55 (the value these labels used before) it composites to 3.99:1 on
+     paper — below AA; at 0.7 it is 6.59:1. */
+  --color-ink-on-paper-muted: rgba(18, 19, 22, 0.7);
 
   /* Accent & structure */
   --color-accent-blue: #0084FF;
@@ -68,11 +72,28 @@ h1 {
   max-width: 18ch;
   text-wrap: balance;
 }
+/* Section headings share the page axis. Every band under them is centered
+   (fact grids, callouts, CTA rows, the centered closing lines), so a heading
+   pinned to the container's left edge reads as a misalignment rather than as
+   an anchor. The `24ch` cap makes this two properties: the cap fixes the box
+   width, so `margin-inline: auto` centers the box and `text-align` centers
+   the lines inside it. Heroes are unaffected — they lead with `h1`. */
 h2 {
   max-width: 24ch;
   font-size: clamp(2rem, 3.5vw, 2rem);
   margin-bottom: 3rem;
+  margin-inline: auto;
+  text-align: center;
   text-wrap: balance;
+}
+
+/* A band's opening paragraph centers with the heading it follows, for the same
+   reason. Scoped to `h2 +` on purpose: prose that sits in a hero (after `h1`)
+   or in a two-column split keeps its left edge. */
+h2 + .lede,
+h2 + .lede-strong {
+  margin-inline: auto;
+  text-align: center;
 }
 
 
@@ -148,7 +169,16 @@ summary:focus-visible {
   text-decoration: none;
 }
 
-.brand-mark { color: var(--color-accent-blue); font-size: 1.2rem; }
+/* Header lockup mark: the canonical small-size cut (src/lib/brand.ts), sized
+   to sit against the 1.25rem wordmark. Kept in the interaction blue the old
+   gear glyph used, so the lockup's accent is unchanged. */
+.brand-mark {
+  display: block;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  color: var(--color-accent-blue);
+}
 
 .site-nav {
   display: flex;
@@ -156,7 +186,10 @@ summary:focus-visible {
   gap: 24px;
 }
 
-.site-nav a {
+/* Header links only. `:not(.btn)` is load-bearing: this rule outranks
+   `.btn-primary` on specificity (0,2,1 against 0,1,0), so letting it match the
+   header CTA repaints the button's text slate on its own blue fill — 1.6:1. */
+.site-nav a:not(.btn) {
   color: var(--color-text-secondary);
   text-decoration: none;
   font-size: 0.95rem;
@@ -171,9 +204,12 @@ summary:focus-visible {
   gap: 24px;
 }
 
+/* Hit target for the header CTA, and nothing else. It used to set the ink here
+   too, to undo the rule above — which meant a header button missing its variant
+   class painted ink on the charcoal header (1:1, invisible). The variant now
+   supplies fill and ink; this keeps the 44px target. Keep a variant on it. */
 .site-nav .btn {
   min-height: 44px;
-  color: var(--color-ink-on-paper);
 }
 
 .mobile-nav { display: none; }
@@ -306,7 +342,7 @@ summary:focus-visible {
   font-weight: 600;
   font-size: 0.8rem;
   text-transform: uppercase;
-  color: rgba(18, 19, 22, 0.55);
+  color: var(--color-ink-on-paper-muted);
   margin-bottom: 14px;
 }
 
@@ -320,7 +356,7 @@ summary:focus-visible {
 .invoice-card .num { text-align: right; white-space: nowrap; }
 
 .invoice-divider td {
-  color: rgba(18, 19, 22, 0.55);
+  color: var(--color-ink-on-paper-muted);
   font-style: italic;
   border-top: 1px dashed rgba(18, 19, 22, 0.25);
   padding-top: 12px;
@@ -496,7 +532,7 @@ summary:focus-visible {
   max-width: 680px;
   margin: -12px auto 0;
   text-align: center;
-  color: rgba(18, 19, 22, 0.7);
+  color: var(--color-ink-on-paper-muted);
 }
 
 /* Footer */
@@ -529,6 +565,180 @@ summary:focus-visible {
 }
 .github-icon { height: 1em; width: 1em; }
 
+/* ---------------------------------------------------------------------------
+   Askable-library demo (/journeyman) — the site's one interactive surface.
+   A console panel on the tinted surface, answering on a paper slip so the
+   record keeps the invoice's print motif. Scripted and offline (see
+   src/components/AskLibraryDemo.astro); every color is a token, so the
+   Journeyman rust variant carries it. The script skips its own pause when the
+   OS asks for reduced motion, and transitions collapse with everything else.
+   --------------------------------------------------------------------------- */
+.ask-console {
+  max-width: 820px;
+  margin: 36px auto 0;
+  padding: 22px;
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.ask-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 18px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ask-bar-name { color: var(--color-text-primary); }
+.ask-bar-scope { color: var(--color-text-secondary); }
+.ask-bar-status { margin-left: auto; color: var(--color-text-secondary); }
+
+.ask-form { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.ask-input {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: 11px 14px;
+  font-family: var(--font-utilitarian);
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.ask-input::placeholder { color: var(--color-text-secondary); }
+.ask-input:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+.ask-chips {
+  display: grid;
+  /* min(100%, …) keeps the track from blowing out a console narrower than the
+     chip's minimum, which on a phone is every one of them. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.ask-chip {
+  min-height: 44px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.ask-chip:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-accent-blue);
+}
+.ask-chip:focus-visible {
+  outline: 2px solid var(--color-accent-blue);
+  outline-offset: 2px;
+}
+
+/* The answer slip. Paper again: the record is a document, and the segment
+   stamp underneath is where the answer came from. */
+.ask-output { margin-top: 18px; }
+
+.ask-answer {
+  padding: 20px 22px;
+  background: var(--color-paper);
+  color: var(--color-ink-on-paper);
+  border-radius: var(--radius-sm);
+}
+
+.ask-answer-q {
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--color-ink-on-paper-muted);
+}
+
+.ask-answer-a { font-size: 1.02rem; }
+
+.ask-source {
+  margin-top: 16px;
+  padding-top: 14px;
+  /* The invoice's dashed itemization rule, on the token the theme carries so
+     the warm ground gets a warm hairline. */
+  border-top: 1px dashed var(--color-border-subtle);
+}
+
+.ask-scrub {
+  display: block;
+  height: 4px;
+  border-radius: var(--radius-md);
+  background: var(--color-border-subtle);
+  overflow: hidden;
+}
+
+.ask-scrub-fill {
+  display: block;
+  height: 100%;
+  background: var(--color-accent-blue);
+}
+
+.ask-source-line {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.6;
+}
+
+.ask-source-seg { display: block; color: var(--color-ink-on-paper); letter-spacing: 0.08em; }
+.ask-source-meta { display: block; color: var(--color-ink-on-paper-muted); }
+
+/* Nothing in the sample fits: say so, and stay on the console's own ground. */
+.ask-miss {
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid var(--color-accent-blue);
+}
+
+.ask-miss-lead {
+  font-family: var(--font-editorial);
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+.ask-miss-body {
+  margin-top: 8px;
+  font-size: 0.94rem;
+  color: var(--color-text-secondary);
+}
+
+.ask-noscript {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.ask-note {
+  max-width: 720px;
+  margin: 18px auto 0;
+  text-align: center;
+  font-size: 0.94rem;
+  color: var(--color-text-secondary);
+}
+
 /* Motion: honor the OS reduce-motion setting. Durations collapse to a
    near-zero instant so hover/focus state changes still register. */
 @media (prefers-reduced-motion: reduce) {
@@ -551,6 +761,7 @@ summary:focus-visible {
   .mobile-nav { display: block; position: relative; }
   .hero-grid { grid-template-columns: 1fr; gap: 48px; }
   .invoice-card { width: min(100%, 420px); }
+  .ask-console { padding: 18px; }
   .hero { padding-top: 56px; }
   .section { padding: 64px 0; }
   h2 { margin-bottom: 2rem; }
@@ -562,6 +773,8 @@ summary:focus-visible {
   .section { padding: 56px 0; }
   .cta-row { align-items: stretch; flex-direction: column; }
   .cta-row .btn { text-align: center; }
+  .ask-bar-status { margin-left: 0; }
+  .ask-answer { padding: 18px; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -581,6 +794,7 @@ summary:focus-visible {
   --color-text-primary: #F6EFE6;
   --color-text-secondary: #B9AC9C;
   --color-ink-on-paper: #16120E;
+  --color-ink-on-paper-muted: rgba(22, 18, 14, 0.7);
 
   /* Accent & structure — the sole saturated hue is now rust, not blue */
   --color-accent-blue: #E25822;
