@@ -6,6 +6,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import {
   organization,
   personWillWollack,
+  personEthanDavidson,
   aboutPage,
   breadcrumbAbout,
   FOUNDER_PORTRAIT,
@@ -23,7 +24,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
   title="About Will Wollack, Wollack Systems"
   description="Who is Will Wollack? The founder story: why he's building Wollack Systems, how networking and hustling landed cofounder Ethan Davidson, and why the mission can't wait."
   path="/about"
-  jsonLd={[organization(), personWillWollack(), aboutPage(), breadcrumbAbout()]}
+  jsonLd={[organization(), personWillWollack(), personEthanDavidson(), aboutPage(), breadcrumbAbout()]}
 >
   <section class="hero">
     <div class="container hero-grid">
@@ -42,7 +43,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
           <a class="btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request"
             >Book a walkthrough</a
           >
-          <a class="btn btn-ghost" href="/journeyman">See what he's building</a>
+          <a class="btn btn-ghost" href="/journeyman/">See what he's building</a>
         </div>
       </div>
 
@@ -171,6 +172,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
                   src={cofounderSrc}
                   alt="Ethan Davidson, cofounder of Wollack Systems"
                   width="240"
+                  height="240"
                 />
                 <figcaption class="cofounder-caption">
                   <span class="cofounder-name">Ethan Davidson</span>
@@ -201,7 +203,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
         written, searchable record your plant owns. Journeyman is the product that does it.
       </p>
       <div class="cta-row cta-center">
-        <a class="btn btn-ghost" href="/journeyman">See how Journeyman works</a>
+        <a class="btn btn-ghost" href="/journeyman/">See how Journeyman works</a>
       </div>
     </div>
   </section>
@@ -389,6 +391,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
 
   .cofounder-img {
     width: 100%;
+    height: auto;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: top;
