@@ -123,6 +123,10 @@ components:
     textColor: "{colors.ink-on-paper}"
     rounded: "{rounded.sm}"
     padding: "28px"
+  brand-lockup:
+    markColor: "{colors.tertiary}"
+    textColor: "{colors.text-primary}"
+    markSize: 30px
 ---
 
 ## Overview
@@ -153,6 +157,12 @@ high-energy accent.
 - **Paper (#F4F3EF):** Warm off-white reserved for print-motif containers
   such as invoices and receipts.
 - **Ink on Paper (#121316):** High-contrast ink used only on Paper surfaces.
+- **Muted ink on Paper (rgba(18, 19, 22, 0.7)):** the secondary ink for
+  labels, captions, and closing lines on Paper surfaces (the invoice head and
+  its italic itemization, `section-close-ink`). At 0.55 it composites to
+  3.99:1 — below AA, which is what those labels shipped as — so 0.7 is the
+  floor at 6.6:1. It is a token, not a literal, so the contrast guard can see
+  it; the Journeyman ground overrides it with its own ink.
 
 Divider lines use `#2B2E35` at `1px` — documented under Layout rather than as
 a token because borders are structural rules, not fills.
@@ -175,6 +185,13 @@ A refined editorial serif carries voice; a functional grotesque carries data.
   letter-spacing +0.12em, Secondary slate — category trackers above headlines.
 - **Table headers (`table-header`):** Inter at `0.75rem`, uppercase,
   letter-spacing +0.05em.
+- **Inline emphasis:** Astro trims whitespace that sits at a line break next to
+  an inline element, so a wrapped `<strong>` or `<a>` glues itself to the word
+  before it — `...the same sentence:` / `<strong>the knowledge...` renders as
+  `sentence:the knowledge`. Text-to-text line breaks are safe. Either keep the
+  text and the element on one line or write `{" "}` before the element, and
+  `npm run check:copy` (CI runs it after the build) fails the build if any page
+  ships a welded word.
 
 ## Layout
 
@@ -184,8 +201,18 @@ A refined editorial serif carries voice; a functional grotesque carries data.
   narrative blocks instead of wrapping everything in cards.
 - **Vertical rhythm:** Section spacing at `{spacing.section}`; component
   internal gaps at `{spacing.md}`–`{spacing.lg}`.
-- **Accent bars:** Vertical blue rules (`3px`) mark pull-quotes and hard
-  truths; horizontal top borders mark sequence steps.
+- **Heading alignment:** section headings and the lead paragraph that opens a
+  band (`h2 + .lede`) sit on the page axis, because everything under them is
+  centered — fact grids, callouts, step lists, CTA rows, the centered closing
+  lines — and a heading pinned to the container's left edge reads as a
+  misalignment, not as an anchor. Two properties are doing the work: the heading
+  is capped at `24ch` (`18ch` for `h1`), so `margin-inline: auto` centers the
+  box, and `text-align: center` centers the lines inside it. A hero keeps
+  left-aligned type because it leads with `h1`, and prose inside a two-column
+  split keeps its left edge.
+- **Body alignment:** prose that is not a band's opening line — step copy, list
+  text, hero copy — stays left-aligned inside its centered block. A centered
+  heading over a left-aligned list is the intended pattern, not a leftover.
 
 ## Elevation & Depth
 
@@ -211,6 +238,14 @@ accent bar on callouts.
 - **button-primary / button-secondary (+hover):** Blue fill with ink text is
   the single loud action; the quiet alternative is white-on-charcoal that
   turns blue on hover.
+- **header-cta:** the primary button at the small size (`btn btn-primary
+  btn-small`), the header's persistent action, with a 44px minimum hit target.
+  It must keep a variant class: `.btn` alone sets no fill, and the header's
+  own link color is deliberately scoped to `a:not(.btn)` because it outranks
+  `.btn-primary` (0,2,1 against 0,1,0) and would repaint the button's text
+  slate on its own fill — 1.6:1. Measured pairs: ink on electric blue 5.1:1 on
+  `/` and `/about`, ink on rust 5.0:1 on `/journeyman`; the mobile menu's
+  quiet link sits at 7.9:1 and 8.4:1 on those grounds.
 - **step-card / step-card-index:** Numbered process blocks — big blue serif
   index over a bold sans title, divided by top rules, no boxes.
 - **accent-callout / callout-quote:** Vertical blue bar with an editorial
@@ -227,11 +262,43 @@ accent bar on callouts.
   caption is the eyebrow style: JetBrains Mono, uppercase, +0.12em tracking,
   name in white with a 14–18px blue accent tick, role in Secondary slate.
   Two accepted sizes: the hero plate (about 380px wide, right column of the
-  about hero; collapses to full-width, max 380px, below 820px) and the step
-  plate (180px, right-aligned beside step copy at 700px and up; centers at
-  220px in the single-column layout below). When a portrait file is absent,
+  about hero; collapses to full-width, max 380px, below 820px) and the team
+  plate (180px, right-aligned beside the partnership copy in `.split-with-plate`
+  at 700px and up; centers at 220px in the single-column layout below). When a
+  portrait file is absent,
   the hero falls back to a typographic placeholder with the same frame (see
   `FEATURES.md`, drop-in portraits).
+
+## Brand mark
+
+The mark is a 1-bit dithered dog head. The site ships one shape and three
+deliberate renderings of it, and all three render the same path: `MARK_PATH`
+in `src/lib/brand.ts`. No other file draws or copies the shape.
+
+| Rendering | Asset | Where it is used | Rules |
+| --- | --- | --- | --- |
+| **Canonical raster** (expressive) | `public/logo.png` (600×600) | `og-image.png` embeds it at 315px on the charcoal ground (checked: the embedded mark matches the reference within 2px); `Organization.logo` and `Organization.image` point at it | Dithered white on a solid black ground, cropped flush to the top and bottom of its square: no transparent padding, ~20px of ground on the left, ~19px on the right. Use it wherever the halftone can read as tone (roughly 96px and up) and wherever structured data needs a crawlable bitmap. |
+| **Small-size cut** (flat fill) | `MARK_PATH` in `src/lib/brand.ts` | Header lockup (`src/components/BrandMark.astro`), `/favicon.svg` | A solid silhouette derived from the raster — derivation in the module docstring. One closed path, no holes, same 600×600 frame and the same flush crop. Below ~48px a halftone's dot density stops reading as tone and its interior shading smears into noise, so the dots, eyes, and muzzle shadow are dropped on purpose. |
+| **Tile** (opaque plate) | `public/favicon-32.png`, `public/apple-touch-icon.png` | PNG favicon fallback, iOS home screen | Charcoal `#121316` plate, the mark centered at 80% of the box. Masked and light-chrome targets need a ground of their own, which is the only reason a plate exists at all. |
+
+- **Lockup:** mark then wordmark, 30px mark, 10px gap, wordmark in Instrument
+  Serif at `1.25rem`. The wordmark carries the name, so the mark is decorative
+  (`aria-hidden`) there; pass `label` to `BrandMark` only where the mark is the
+  sole carrier of the brand name.
+- **Color:** the lockup mark is tinted with the page accent token, so it rides
+  the Journeyman rust variant. The favicon instead follows the browser chrome
+  (`prefers-color-scheme`: charcoal ink on light chrome, white on dark), because
+  its ground is not ours to control.
+- **Crop:** every rendering keeps the canonical frame. Do not re-crop the mark
+  to its content bounds, add padding, or stretch it — the flush top and bottom
+  edges are the mark's intended crop, and the small-size cut reproduces it
+  (x 19..578 against the raster's own dot envelope of x 19..578).
+- **Regenerating:** if `public/logo.png` is ever replaced, re-derive the
+  silhouette (dilate the dots to bridge the halftone cells, flood-fill the
+  exterior from all four corners — the mark's flush crop splits it into two
+  regions — erode back to the envelope, smooth, then trace and simplify the
+  single contour), update `MARK_PATH`, and re-render the two tile PNGs from it.
+  Everything else follows automatically.
 
 ## Do's and Don'ts
 
@@ -242,6 +309,9 @@ Do use dividers before cards; wrap only when grouping truly demands it.
 
 Don't introduce additional hues; the palette is charcoal, slate, bone, white,
 and exactly one blue.
+Don't add a second brand mark, redraw the mark per surface, or give it a
+transparent-padded, re-cropped, or stretched variant: the three renderings in
+Brand mark are the whole system.
 Don't round corners past `2px` or add drop shadows beyond the two accepted
 physical-object exceptions above.
 Don't set body copy wider than ~65ch or pair Electric Blue with Paper — blue

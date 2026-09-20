@@ -59,10 +59,17 @@ const ogImageAlt =
     <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128296;</text></svg>"
-    />
+    <!--
+      Canonical mark (issue #13): all three icons, and the navbar lockup in
+      SiteHeader.astro, render the single path in src/lib/brand.ts.
+      /favicon.svg is the adaptive vector cut (dark on light chrome, white on
+      dark chrome); the 32px PNG is the fallback for engines that ignore SVG
+      favicons, and the 180px apple-touch-icon is the tile variant iOS masks,
+      so both rasters are the opaque charcoal tile rather than the bare mark.
+    -->
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

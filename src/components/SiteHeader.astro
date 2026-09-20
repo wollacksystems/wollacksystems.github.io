@@ -1,7 +1,13 @@
 ---
-// Shared header: gear brand mark + nav. Self-detects the Journeyman page from
-// the URL path, which adds the cross-page "Home" link and switches the
+// Shared header: canonical brand mark + nav. Self-detects the Journeyman page
+// from the URL path, which adds the cross-page "Home" link and switches the
 // walkthrough mailto subject.
+//
+// The lockup is mark + wordmark. The wordmark carries the brand name, so the
+// mark is decorative to assistive tech; see src/lib/brand.ts for the mark and
+// the documented small-size variant it renders.
+import BrandMark from './BrandMark.astro';
+
 const variant = Astro.url.pathname.startsWith('/journeyman') ? 'journeyman' : 'home';
 const walkthroughSubject =
   variant === 'journeyman' ? 'Journeyman%20walkthrough%20request' : 'Walkthrough%20request';
@@ -11,7 +17,7 @@ const walkthroughSubject =
   <div class="container header-inner">
     <div class="brand">
       <a href="/">
-        <span class="brand-mark">&#9881;</span>
+        <BrandMark class="brand-mark" size={30} />
         <span class="brand-name">Wollack&nbsp;Systems</span>
       </a>
     </div>
@@ -26,9 +32,9 @@ const walkthroughSubject =
         ) : (
           <>
             <a href="/journeyman">Journeyman</a>
+            <a href="/about">Who</a>
             <a href="/#mission">Why</a>
             <a href="/#how">How</a>
-            <a href="/about">About</a>
           </>
         )}
       </div>
@@ -44,9 +50,9 @@ const walkthroughSubject =
           ) : (
             <>
               <a href="/journeyman">Journeyman</a>
+              <a href="/about">Who</a>
               <a href="/#mission">Why</a>
               <a href="/#how">How</a>
-              <a href="/about">About</a>
             </>
           )}
           <a class="mobile-nav-cta" href={`mailto:willwollack@gmail.com?subject=${walkthroughSubject}`}
@@ -54,7 +60,7 @@ const walkthroughSubject =
           >
         </div>
       </details>
-      <a class="btn btn-small nav-cta" href={`mailto:willwollack@gmail.com?subject=${walkthroughSubject}`}
+      <a class="btn btn-primary btn-small nav-cta" href={`mailto:willwollack@gmail.com?subject=${walkthroughSubject}`}
         >Book a walkthrough</a
       >
     </nav>

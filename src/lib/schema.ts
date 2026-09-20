@@ -45,10 +45,14 @@ export function organization() {
     '@id': ORG_ID,
     name: 'Wollack Systems',
     url: SITE_URL,
+    // Both point at the canonical raster (issue #13). It stays a raster on
+    // purpose: Google's logo guidance wants a crawlable bitmap of at least
+    // 112x112, which rules out the vector small-size cut the favicon and
+    // header lockup use. See src/lib/brand.ts for the mark's variants.
     logo: `${SITE_URL}/logo.png`,
     image: `${SITE_URL}/logo.png`,
     description:
-      'Wollack Systems records what experienced manufacturing operators know, hands-free, and turns it into a permanent, searchable record the plant owns.',
+      'Wollack Systems records what experienced manufacturing operators know, hands-free, and turns it into a permanent, searchable record the plant keeps.',
     email: 'willwollack@gmail.com',
     founder: { '@id': PERSON_WILL_ID },
     sameAs: ['https://github.com/wollacksystems'],
@@ -72,7 +76,7 @@ export function personWillWollack() {
   };
 }
 
-/** Ethan Davidson, cofounder — pitched at a Newport Beach networking event. */
+/** Ethan Davidson, cofounder — met Will after a Newport Beach networking event pitch. */
 export function personEthanDavidson() {
   return {
     '@context': 'https://schema.org',
@@ -108,7 +112,7 @@ export function productJourneyman() {
     '@id': PRODUCT_JOURNEYMAN_ID,
     name: 'Journeyman',
     description:
-      'Journeyman records how your most experienced operators do their work and turns it into a written, searchable record your plant owns and can train from.',
+      'Journeyman records how your most experienced operators do their work and turns it into a written, searchable record your plant keeps and can train on.',
     brand: { '@id': ORG_ID },
     url: `${SITE_URL}/journeyman`,
     manufacturer: { '@id': ORG_ID },
