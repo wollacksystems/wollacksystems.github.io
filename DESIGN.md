@@ -190,8 +190,9 @@ A refined editorial serif carries voice; a functional grotesque carries data.
   before it — `...the same sentence:` / `<strong>the knowledge...` renders as
   `sentence:the knowledge`. Text-to-text line breaks are safe. Either keep the
   text and the element on one line or write `{" "}` before the element, and
-  `npm run check:copy` (CI runs it after the build) fails the build if any page
-  ships a welded word.
+  `npm run check:copy` fails the build if any page ships a welded word; it runs
+  after the build in both `ci.yml` and the Pages deploy, which publishes only if
+  the guards pass.
 
 ## Layout
 

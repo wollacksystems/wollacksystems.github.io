@@ -14,6 +14,7 @@
     "check:demo": "node scripts/check-demo.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
     "check:language": "node scripts/check-language.mjs",
+    "check:all": "npm run check && npm run check:copy && npm run check:demo && npm run check:contrast && npm run check:language",
     "preview": "astro preview",
     "astro": "astro"
   },

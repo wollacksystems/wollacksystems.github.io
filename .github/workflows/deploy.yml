@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   # Trigger on every push to `main`. GitHub Pages uses a branch-based
   # convention: if you only want deploys on release, swap this for a tag.
+  # The build job runs the site's checks before the deploy job may publish, so a
+  # push that breaks one leaves the last good build live rather than shipping.
   push:
     branches: [main]
   # Allow manual deploys from the Actions tab.
@@ -29,6 +31,23 @@ jobs:
         uses: actions/checkout@v6
       - name: Install, build, and upload site
         uses: withastro/action@v6
+
+      # The same gate ci.yml runs on every pull request — the type-check and the
+      # four guards — here against the dist this job just built, the artifact the
+      # deploy would publish. They run after the build because the guards read the
+      # built HTML. A failure fails this job, and `deploy` needs it, so GitHub
+      # Pages keeps serving the last build that passed.
+      #
+      # `astro build` does not type-check, so until this step ran `astro check`
+      # only on pull requests and a type error that still builds could reach
+      # production on a push to `main`. `check:all` is the gate, so a fifth guard
+      # is one line in package.json and both workflows pick it up.
+      #
+      # Node here is the version `withastro/action` installs (24 by default,
+      # matching ci.yml). The demo guard imports the site's `.ts` modules, so it
+      # needs Node's type stripping (>= 22.6) — the floor in package.json engines.
+      - name: Checks (type-check + guards)
+        run: npm run check:all
 
   deploy:
     needs: build
