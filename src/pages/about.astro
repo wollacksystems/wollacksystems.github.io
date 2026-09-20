@@ -9,6 +9,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import {
   organization,
   personWillWollack,
+  personEthanDavidson,
   aboutPage,
   breadcrumbAbout,
   FOUNDER_PORTRAIT,
@@ -26,7 +27,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
   title="About Will Wollack, Wollack Systems"
   description="What Will Wollack listens for in every room, and the engineer who writes the record down. The founder and cofounder behind Wollack Systems."
   path="/about"
-  jsonLd={[organization(), personWillWollack(), aboutPage(), breadcrumbAbout()]}
+  jsonLd={[organization(), personWillWollack(), personEthanDavidson(), aboutPage(), breadcrumbAbout()]}
 >
   <section class="hero">
     <div class="container hero-grid">
@@ -44,7 +45,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
           <a class="btn btn-primary" href="mailto:willwollack@gmail.com?subject=Walkthrough%20request"
             >Book a walkthrough</a
           >
-          <a class="btn btn-ghost" href="/journeyman">See what's being built</a>
+          <a class="btn btn-ghost" href="/journeyman/">See what's being built</a>
         </div>
       </div>
 
@@ -119,6 +120,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
                 src={cofounderSrc}
                 alt="Ethan Davidson, cofounder of Wollack Systems"
                 width="240"
+                height="240"
               />
               <figcaption class="cofounder-caption">
                 <span class="cofounder-name">Ethan Davidson</span>
@@ -307,6 +309,7 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
 
   .cofounder-img {
     width: 100%;
+    height: auto;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: top;
