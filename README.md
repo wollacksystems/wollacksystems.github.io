@@ -30,11 +30,13 @@ npm run check:copy  # fail if a built page ships a welded word (run after build)
 npm run check:demo  # fail if the demo's questions, answers, or sources stop lining up
 npm run check:contrast  # fail if a token pair drops below WCAG AA
 npm run check:language  # fail if the copy defaults anyone to a gender
+npm run check:all   # the type-check plus all four guards — the gate CI and the
+                    # Pages deploy both run before anything ships
 ```
 
 ## Hosting
 
-Deployed to GitHub Pages by CI: `.github/workflows/deploy.yml` builds the site on every push to `main` and publishes `dist/` through GitHub Actions (the repo's Pages source must be set to "GitHub Actions"). A migration to AWS (S3 + CloudFront) is planned as Phase 1 of the platform hosting plan; GitHub Pages stays as a staging mirror until the DNS cutover.
+Deployed to GitHub Pages by CI: `.github/workflows/deploy.yml` builds the site on every push to `main`, runs `npm run check:all` — the `astro check` type-check plus the four guards — against the `dist/` it is about to publish, and only then publishes through GitHub Actions (the repo's Pages source must be set to "GitHub Actions"). A failure fails the build job, so the `deploy` job never runs and Pages keeps serving the last build that passed. A migration to AWS (S3 + CloudFront) is planned as Phase 1 of the platform hosting plan; GitHub Pages stays as a staging mirror until the DNS cutover.
 
 ## Brand voice
 

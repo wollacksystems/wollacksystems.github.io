@@ -1,7 +1,10 @@
 name: CI
 
-# Status check for every pull request: type-check the Astro codebase,
-# then build the site. The Pages deploy workflow (deploy.yml) ships main.
+# Status check for every pull request: build the site, then run the whole
+# release gate — the type-check and the four guards. The Pages deploy workflow
+# (deploy.yml) runs the same gate against the dist it publishes, so a push
+# straight to main is gated by the same checks a pull request is, and a failure
+# stops the publish instead of shipping the regression.
 on:
   pull_request:
 
@@ -29,28 +32,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Type-check (astro check)
-        run: npx astro check
-
       - name: Build
         run: npm run build
 
-      # Astro drops the space at a line break beside an inline element, welding
-      # words together ("sentence:the knowledge"). Read the built HTML for it.
-      - name: Copy spacing guard
-        run: npm run check:copy
-
-      # The askable-library demo is wired by ids in markup and is sold as a
-      # scripted, offline sample: a broken pair or a stray fetch builds and
-      # renders fine, and clicking a question does nothing.
-      - name: Demo guard
-        run: npm run check:demo
-
-      # The palette's contrast pairs, which no type-check or build can see: a
-      # text color equal to its surface renders "fine" and invisible.
-      - name: Contrast guard
-        run: npm run check:contrast
-
-      # Nobody in the copy is defaulted to a gender (README, Brand voice).
-      - name: Language guard
-        run: npm run check:language
+      # The whole release gate, in one step: `check:all` is the type-check
+      # (`astro check`) followed by the four guards, which fail what a build and
+      # a type-check both pass, so nothing else in this workflow can see them.
+      #
+      # The type-check runs after the build only because the guards read the
+      # built HTML and this is one script. `astro build` does not type-check, so
+      # a type error that still builds is caught here and nowhere else.
+      #
+      #   copy      Astro drops the space at a line break beside an inline
+      #             element, welding words together ("sentence:the knowledge").
+      #   demo      The askable-library demo is wired by ids in markup and is
+      #             sold as scripted and offline: a broken pair or a stray
+      #             fetch builds and renders fine, and clicking does nothing.
+      #   contrast  The palette's token pairs: a text color equal to its
+      #             surface renders fine and invisible.
+      #   language  Nobody in the copy is defaulted to a gender (Brand voice).
+      #
+      # Each check prints its own count, so a single step still names the one
+      # that failed. `check:all` is the gate, so a fifth guard is one line in
+      # package.json and both this workflow and deploy.yml pick it up.
+      - name: Checks (type-check + guards)
+        run: npm run check:all
