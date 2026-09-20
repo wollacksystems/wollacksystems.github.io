@@ -34,3 +34,17 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      # Astro drops the space at a line break beside an inline element, welding
+      # words together ("sentence:the knowledge"). Read the built HTML for it.
+      - name: Copy spacing guard
+        run: npm run check:copy
+
+      # The palette's contrast pairs, which no type-check or build can see: a
+      # text color equal to its surface renders "fine" and invisible.
+      - name: Contrast guard
+        run: npm run check:contrast
+
+      # Nobody in the copy is defaulted to a gender (README, Brand voice).
+      - name: Language guard
+        run: npm run check:language
