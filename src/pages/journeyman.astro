@@ -21,7 +21,7 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
         <h1>The work happens in their hands. The knowledge should live on in writing.</h1>
         <p class="lede">
           Journeyman records how your best operators work, in their own words. Your plant owns the
-          recordings, and the written record is yours to keep.
+          recordings.
         </p>
         <div class="cta-row">
           <a
@@ -39,15 +39,17 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
           <tr><td>Written record of every fix</td><td class="num">YES</td></tr>
           <tr><td>Replayable, step by step</td><td class="num">YES</td></tr>
           <tr><td>In the operator's own words</td><td class="num">YES</td></tr>
+          <!-- No "yours to use and build on" row: the card below spells that
+               license out in full, and the row before it already says who owns
+               the recordings. -->
           <tr class="invoice-divider"><td colspan="2">After we deliver:</td></tr>
           <tr><td>Ask it questions</td><td class="num">YES</td></tr>
-          <tr><td>Yours to use and build on</td><td class="num">YES</td></tr>
           <tr class="invoice-total">
             <td>Who owns the recordings</td><td class="num">YOUR PLANT</td>
           </tr>
         </table>
         <p class="invoice-note">
-          No screens, no busywork for the operator. They just do the job.
+          No screens. No busywork. They just do the job.
         </p>
       </aside>
     </div>
@@ -58,17 +60,15 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
     <div class="container">
       <h2>What Journeyman is</h2>
       <p class="section-close">
-        Apprenticeship has one limit: an expert can stand next to one person at a time. Journeyman
-        captures it once, and serves the whole plant.
+        Apprenticeship has one limit: one expert, one person at a time. Journeyman captures it once
+        and serves the whole plant.
       </p>
+      <!-- Three cards, not four: "In their words" was the H1, the lede, the invoice
+           row, and step 03 of the engagement, all saying it again. -->
       <div class="grid-4">
         <div class="card">
-          <h3>In their words</h3>
-          <p>Recorded from the people who do the work: every fix, every trick, every reason.</p>
-        </div>
-        <div class="card">
           <h3>Written the same week</h3>
-          <p>Six hours of explanation becomes a searchable record. No shelf of unlabeled tapes.</p>
+          <p>Six hours of explanation becomes a searchable record, not a shelf of tapes.</p>
         </div>
         <div class="card">
           <h3>Replayable anywhere</h3>
@@ -76,13 +76,13 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
         </div>
         <div class="card">
           <h3>Yours, for good</h3>
-          <p>Your plant owns the recordings, and the written record is yours to use and build on.</p>
+          <p>Your plant owns the recordings. The written record is yours to use and build on.</p>
         </div>
       </div>
       <div class="accent-callout">
         <p>
-          What we learn beyond your floor travels de-identified: no drawings, no part numbers, no
-          names. We commit never to re-identify it.
+          Beyond your floor, what we learn travels de-identified: no drawings, no part numbers, no
+          names. We never re-identify it.
         </p>
       </div>
     </div>
@@ -104,10 +104,7 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
       </p>
       <AskLibraryDemo />
       <div class="accent-callout">
-        <p>
-          Your library travels through your own tunnel into the platform — and that tunnel reaches
-          nothing but your data.
-        </p>
+        <p>Your library arrives through your own tunnel, which reaches nothing but your data.</p>
       </div>
     </div>
   </section>
@@ -119,16 +116,13 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
       <ol class="steps">
         <li>
           <h3>A walkthrough, then a quote.</h3>
-          <p>
-            We walk your floor and find who carries the knowledge. Firm quote in days: half up front,
-            the rest on delivery.
-          </p>
+          <p>We find who carries the knowledge and write the quote in days.</p>
         </li>
         <li>
           <h3>Capture sessions, on their schedule.</h3>
           <p>
-            Off-the-shelf gear: a mic, a chest or helmet mount, and a camera on the machine. The
-            operator works normally and talks us through it.
+            Off-the-shelf gear: a mic, a chest or helmet mount, a camera on the machine. The operator
+            works and talks us through it.
           </p>
         </li>
         <li>
@@ -140,7 +134,7 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
         </li>
         <li>
           <h3>Tweaks, then done.</h3>
-          <p>We refine until it reads right for your floor. Then it's yours.</p>
+          <p>We refine until it reads right. Then it's yours.</p>
         </li>
       </ol>
     </div>
@@ -157,11 +151,11 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
         </div>
         <div class="fact">
           <div class="fact-number">Zero screens</div>
-          <p>for the operators. They wear a mic and work; the recording takes the notes.</p>
+          <p>for the operators. They wear a mic; the record takes the notes.</p>
         </div>
         <div class="fact">
           <div class="fact-number">Both languages</div>
-          <p>we speak operator and manager. We get the knowledge and make the business case.</p>
+          <p>we speak operator and manager: the knowledge, and the business case.</p>
         </div>
       </div>
       <div class="accent-callout">
@@ -174,11 +168,13 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
   <section class="section section-tinted" id="pricing">
     <div class="container pricing-wrap">
       <h2>Simple to start</h2>
-      <p class="price-anchor"><strong>A firm quote, days after the walkthrough.</strong></p>
+      <!-- The anchor names both fee halves instead of restating step 01's quote,
+           which is the one thing a buyer pricing this needs up front. -->
+      <p class="price-anchor"><strong>Capture once. Library monthly.</strong></p>
       <p class="price-sub">
-        Capture is quoted per project: half up front, the balance on delivery, with extra experts
-        and extra days priced up front in writing. Access to the library is monthly, from delivery,
-        for the named users in your agreement. Thirty days' notice ends it.
+        Capture is quoted per project: half up front, the balance on delivery, extras priced in
+        writing. Library access is monthly, from delivery, for the named users in your agreement.
+        Thirty days' notice ends it.
       </p>
       <div class="cta-row cta-center">
         <a
@@ -194,8 +190,10 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
   <section class="section section-paper" id="book">
     <div class="container">
       <h2>Your best operator's knowledge<br />is one capture from becoming a company asset.</h2>
+      <!-- Distinct from the landing page's close on purpose: that one is the same
+           invitation, and this page can ask the sharper question. -->
       <p class="section-close-ink">
-        One conversation tells you what capture would look like on your floor.
+        Tell us who carries the knowledge. We'll tell you what capture would take.
       </p>
       <div class="cta-row cta-center">
         <a
