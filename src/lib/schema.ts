@@ -112,7 +112,7 @@ export function productJourneyman() {
     '@id': PRODUCT_JOURNEYMAN_ID,
     name: 'Journeyman',
     description:
-      'Journeyman records how your most experienced operators do their work and turns it into a written, searchable record your plant keeps and can train on.',
+      'Journeyman records how your most experienced operators do their work, in their own words, and turns it into a searchable library the plant can ask questions of and train from.',
     brand: { '@id': ORG_ID },
     url: `${SITE_URL}/journeyman/`,
     manufacturer: { '@id': ORG_ID },
