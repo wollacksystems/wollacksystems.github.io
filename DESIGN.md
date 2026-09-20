@@ -201,7 +201,10 @@ A refined editorial serif carries voice; a functional grotesque carries data.
 - **Dividers:** Subtle horizontal rules — `1px solid #2B2E35` — segment
   narrative blocks instead of wrapping everything in cards.
 - **Vertical rhythm:** Section spacing at `{spacing.section}`; component
-  internal gaps at `{spacing.md}`–`{spacing.lg}`.
+  internal gaps at `{spacing.md}`–`{spacing.lg}`. A `.section-close` that acts
+  as the lede introducing a grid (`+ .grid-3` / `+ .grid-4`) is followed by
+  `36px` of entry room — the same air the band gives between heading and lede;
+  the grid's top rule must never sit flush against the lede.
 - **Heading alignment:** section headings and the lead paragraph that opens a
   band (`h2 + .lede`) sit on the page axis, because everything under them is
   centered — fact grids, callouts, step lists, CTA rows, the centered closing
