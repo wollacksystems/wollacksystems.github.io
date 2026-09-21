@@ -390,6 +390,14 @@ summary:focus-visible {
   color: var(--color-text-secondary);
 }
 
+/* When a section-close acts as the lede that introduces a grid (#product,
+   #trust), the grid needs its own entry room — otherwise the first card's
+   top rule sits flush against the lede. Matches the band's h2-to-lede rhythm. */
+.section-close + .grid-3,
+.section-close + .grid-4 {
+  margin-top: 36px;
+}
+
 /* Accent callout — vertical blue rule + editorial quote */
 .accent-callout {
   display: flex;
