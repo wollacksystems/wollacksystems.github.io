@@ -4,7 +4,7 @@
 // <body data-theme="journeyman"> via BaseLayout.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AskLibraryDemo from '../components/AskLibraryDemo.astro';
-import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
+import { productJourneyman, breadcrumbJourneyman, videoJourneymanBrag } from '../lib/schema';
 ---
 
 <BaseLayout
@@ -12,7 +12,9 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
   description="Journeyman records how your best operators work, in their own words, and turns it into a library your plant can search, ask questions of, and train from."
   theme="journeyman"
   path="/journeyman"
-  jsonLd={[productJourneyman(), breadcrumbJourneyman()]}
+  jsonLd={[productJourneyman(), breadcrumbJourneyman(), videoJourneymanBrag()].flatMap((
+    entity,
+  ) => (entity ? [entity] : []))}
 >
   <section class="hero">
     <div class="container hero-grid">
@@ -52,6 +54,37 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
           No screens. No busywork. They just do the job.
         </p>
       </aside>
+    </div>
+  </section>
+
+  <!-- The launch film (#17): 34 seconds, six scenes, and the deployed
+       endpoint's own output on screen for nearly half of it. A plain
+       <video> — no script, so the site's one-script contract holds; the
+       poster carries the first paint and preload="none" keeps the 3.5 MB
+       out of the page until a visitor presses play. -->
+  <section class="section" id="film">
+    <div class="container">
+      <h2>See it in 34 seconds</h2>
+      <p class="section-close">
+        The capture rig, the pipeline, and the live library answering a real question.
+      </p>
+      <figure class="film-frame">
+        <video
+          controls
+          playsinline
+          preload="none"
+          poster="/journeyman/brag-poster.png"
+          aria-label="Journeyman launch film: the capture rig, the pipeline, and the live library answering a real question.">
+          <source src="/journeyman/brag.mp4" type="video/mp4" />
+          <a href="https://github.com/wollacksystems/wollacksystems.github.io/issues/17">
+            Watch the launch film on GitHub
+          </a>
+        </video>
+        <figcaption>
+          The film's answer scenes are this endpoint's own bytes, replayed at native resolution
+          &mdash; no mocked responses, no narrator.
+        </figcaption>
+      </figure>
     </div>
   </section>
 

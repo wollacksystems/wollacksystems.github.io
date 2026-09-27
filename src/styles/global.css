@@ -574,6 +574,35 @@ summary:focus-visible {
 .github-icon { height: 1em; width: 1em; }
 
 /* ---------------------------------------------------------------------------
+   Launch film (/journeyman#film) — the 34-second brag cut (#17).
+   The same panel treatment as the ask-console: a bordered surface panel,
+   every color a token, so the Journeyman rust variant carries it. The video
+   itself is a plain element — no script, so the site's one-script contract
+   holds — and its 16:9 box is set by aspect-ratio so the poster paints the
+   layout before the 3.5 MB file is asked for (preload="none").
+   --------------------------------------------------------------------------- */
+.film-frame {
+  max-width: 820px;
+  margin: 36px auto 0;
+}
+
+.film-frame video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.film-frame figcaption {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.94rem;
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------------------------
    Askable-library demo (/journeyman) — the site's one interactive surface.
    A console panel on the tinted surface, answering on a paper slip so the
    record keeps the invoice's print motif. Scripted and offline (see
