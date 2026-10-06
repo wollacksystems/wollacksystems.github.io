@@ -107,8 +107,8 @@ import { productJourneyman, breadcrumbJourneyman, videoJourneymanBrag } from '..
   <!-- The launch film (#17): 34 seconds, six scenes, and the deployed
        endpoint's own output on screen for nearly half of it. A plain
        <video> — no script, so the site's one-script contract holds; the
-       poster carries the first paint and preload="none" keeps the 3.5 MB
-       out of the page until a visitor presses play. -->
+       poster carries the first paint, and it starts on its own — muted and looping,
+       by attribute alone, so the one-script contract still holds. -->
   <section class="section" id="film">
     <div class="container">
       <h2>See it in 34 seconds</h2>
@@ -119,7 +119,7 @@ import { productJourneyman, breadcrumbJourneyman, videoJourneymanBrag } from '..
         <video
           controls
           playsinline
-          preload="none"
+          autoplay muted loop preload="metadata"
           poster="/journeyman/brag-poster.png"
           aria-label="Journeyman launch film: the capture rig, the pipeline, and the live library answering a real question.">
           <source src="/journeyman/brag.mp4" type="video/mp4" />
