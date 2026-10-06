@@ -161,15 +161,17 @@ const demo = DEMO_ANSWERS;
     // answers it, dwells, moves on — looping until the reader touches it.
     // Any pointer press or keypress hands the demo back for good. Never
     // starts under prefers-reduced-motion, only once the console is on screen.
-    if (!reduceMotion && chips.length && 'IntersectionObserver' in window) {
+    if (!reduceMotion && chips.length) {
       let stopped = false;
       let typing: number | undefined;
       let turn = 0;
       let pacing: number | undefined;
+      let watch: number | undefined;
       const halt = () => {
         stopped = true;
         window.clearTimeout(typing);
         window.clearTimeout(pacing);
+        if (watch !== undefined) window.clearInterval(watch);
       };
       const step = (chip: HTMLButtonElement, text: string, n: number) => {
         if (stopped) return;
@@ -193,12 +195,38 @@ const demo = DEMO_ANSWERS;
         if (status) status.textContent = `${chips.length} segments indexed`;
         typing = window.setTimeout(() => step(chip, text, 1), 420);
       };
-      const observer = new IntersectionObserver((entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        if (!stopped) pacing = window.setTimeout(next, 900);
-      }, { threshold: 0.3 });
-      observer.observe(root);
+      // The observer is the polite way in, but not the only way: some
+      // embedded previews never deliver intersection callbacks, so the same
+      // \"on screen\" check also runs on scroll, on resize, and on a slow tick
+      // until it lands. Same rules either way: starts once, only while the
+      // console is in view, and never on top of a reader's own touch.
+      let started = false;
+      let observer: IntersectionObserver | undefined;
+      const tryStart = () => {
+        if (started || stopped) return;
+        const rect = root.getBoundingClientRect();
+        const seen = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        if (seen <= 0 || seen < Math.min(rect.height, window.innerHeight) * 0.3) return;
+        started = true;
+        observer?.disconnect();
+        if (watch !== undefined) window.clearInterval(watch);
+        window.removeEventListener('scroll', tryStart);
+        window.removeEventListener('resize', tryStart);
+        pacing = window.setTimeout(next, 900);
+      };
+      if ('IntersectionObserver' in window) {
+        observer = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) tryStart();
+          },
+          { threshold: 0.3 },
+        );
+        observer.observe(root);
+      }
+      watch = window.setInterval(tryStart, 500);
+      window.addEventListener('scroll', tryStart, { passive: true });
+      window.addEventListener('resize', tryStart);
+      tryStart();
       root.addEventListener('pointerdown', halt, { once: true });
       root.addEventListener('keydown', halt, { once: true });
     }
