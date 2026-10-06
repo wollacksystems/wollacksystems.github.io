@@ -56,6 +56,28 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
     </div>
   </section>
 
+  <!-- The library: the flagship surface, so it lands second, right after the
+       hero — the page's proof before its pitch. Left alone it types through
+       its four questions on loop until the first click or keypress. The
+       demo answers from a scripted sample corpus with no network and no model
+       (src/lib/library-demo.ts), so the section's three claims are shown
+       rather than described: ask it in plain language, every answer names the
+       segment it came from, and the panel wears the plant's name. Amounts and
+       named-user counts stay unquoted: Part 1 of the Knowledge Capture
+       Agreement leaves them to the quote. -->
+  <section class="section" id="library">
+    <div class="container">
+      <h2>Ask Journeyman</h2>
+      <p class="section-close">
+        Not a document you file. A library you can ask.
+      </p>
+      <AskLibraryDemo />
+      <div class="accent-callout">
+        <p>Your library arrives through your own tunnel, which reaches nothing but your data.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- What it is -->
   <section class="section section-tinted" id="product">
     <div class="container">
@@ -86,27 +108,6 @@ import { productJourneyman, breadcrumbJourneyman } from '../lib/schema';
           names. We keep the general technique and use it with other plants. We never re-identify
           it.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- The library: the flagship surface, so it lands here, right after what
-       the product is — and the demo is the proof of the claim above it. The
-       demo answers from a scripted sample corpus with no network and no model
-       (src/lib/library-demo.ts), so the section's three claims are shown
-       rather than described: ask it in plain language, every answer names the
-       segment it came from, and the panel wears the plant's name. Amounts and
-       named-user counts stay unquoted: Part 1 of the Knowledge Capture
-       Agreement leaves them to the quote. -->
-  <section class="section" id="library">
-    <div class="container">
-      <h2>Ask Journeyman</h2>
-      <p class="section-close">
-        Not a document you file. A library you can ask.
-      </p>
-      <AskLibraryDemo />
-      <div class="accent-callout">
-        <p>Your library arrives through your own tunnel, which reaches nothing but your data.</p>
       </div>
     </div>
   </section>

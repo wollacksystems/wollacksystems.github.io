@@ -156,5 +156,51 @@ const demo = DEMO_ANSWERS;
       const id = pick(question, index);
       reveal(slips.find((candidate) => candidate.dataset.askAnswer === id) ?? null, question);
     });
+
+    // The splash beat (Oct 5): the demo runs itself — types a question,
+    // answers it, dwells, moves on — looping until the reader touches it.
+    // Any pointer press or keypress hands the demo back for good. Never
+    // starts under prefers-reduced-motion, only once the console is on screen.
+    if (!reduceMotion && chips.length && 'IntersectionObserver' in window) {
+      let stopped = false;
+      let typing: number | undefined;
+      let turn = 0;
+      let pacing: number | undefined;
+      const halt = () => {
+        stopped = true;
+        window.clearTimeout(typing);
+        window.clearTimeout(pacing);
+      };
+      const step = (chip: HTMLButtonElement, text: string, n: number) => {
+        if (stopped) return;
+        if (input) input.value = text.slice(0, n);
+        if (n < text.length) {
+          typing = window.setTimeout(() => step(chip, text, n + 1), 36);
+          return;
+        }
+        pacing = window.setTimeout(() => {
+          if (stopped) return;
+          const slip = slips.find((c) => c.dataset.askAnswer === chip.dataset.askEntry) ?? null;
+          reveal(slip, text);
+          pacing = window.setTimeout(next, 3600);
+        }, 480);
+      };
+      const next = () => {
+        if (stopped) return;
+        const chip = chips[turn++ % chips.length];
+        const text = (chip.textContent ?? '').trim();
+        if (input) input.value = '';
+        if (status) status.textContent = `${chips.length} segments indexed`;
+        typing = window.setTimeout(() => step(chip, text, 1), 420);
+      };
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        if (!stopped) pacing = window.setTimeout(next, 900);
+      }, { threshold: 0.3 });
+      observer.observe(root);
+      root.addEventListener('pointerdown', halt, { once: true });
+      root.addEventListener('keydown', halt, { once: true });
+    }
   }
 </script>
