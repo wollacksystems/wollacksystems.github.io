@@ -37,6 +37,19 @@ export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const PRODUCT_JOURNEYMAN_ID = `${SITE_URL}/journeyman/#product`;
 export const ABOUT_PAGE_ID = `${SITE_URL}/about/#aboutpage`;
 
+// The Journeyman launch film (issue #17): drop the cut at
+// public/journeyman/brag.mp4 and rebuild — it then feeds both the #film
+// section on /journeyman and the VideoObject schema below. Same drop-in
+// convention as the portraits: absent file, absent video, valid page.
+export const BRAG_FILM = existsSync(join(process.cwd(), 'public', 'journeyman', 'brag.mp4'))
+  ? '/journeyman/brag.mp4'
+  : null;
+export const BRAG_FILM_POSTER = existsSync(
+  join(process.cwd(), 'public', 'journeyman', 'brag-poster.png'),
+)
+  ? '/journeyman/brag-poster.png'
+  : null;
+
 /** The company. Referenced by `founder`, `publisher`, and `brand`. */
 export function organization() {
   return {
@@ -116,6 +129,26 @@ export function productJourneyman() {
     brand: { '@id': ORG_ID },
     url: `${SITE_URL}/journeyman/`,
     manufacturer: { '@id': ORG_ID },
+  };
+}
+
+/** The 34-second launch film on /journeyman, about the product. */
+export function videoJourneymanBrag() {
+  if (!BRAG_FILM) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    '@id': `${SITE_URL}/journeyman/#brag-film`,
+    name: 'The Journeyman launch film',
+    description:
+      "A 34-second launch film: what Journeyman captures, how the pipeline turns it into a library, and the deployed endpoint answering a real question in the site's own ask-console.",
+    thumbnailUrl: BRAG_FILM_POSTER ? `${SITE_URL}${BRAG_FILM_POSTER}` : undefined,
+    uploadDate: '2026-09-26',
+    duration: 'PT34S',
+    contentUrl: `${SITE_URL}${BRAG_FILM}`,
+    embedUrl: `${SITE_URL}/journeyman/#film`,
+    publisher: { '@id': ORG_ID },
+    about: { '@id': PRODUCT_JOURNEYMAN_ID },
   };
 }
 
