@@ -34,7 +34,7 @@ export const ORG_ID = `${SITE_URL}/#organization`;
 export const PERSON_WILL_ID = `${SITE_URL}/#will-wollack`;
 export const PERSON_ETHAN_ID = `${SITE_URL}/#ethan-davidson`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
-export const PRODUCT_JOURNEYMAN_ID = `${SITE_URL}/journeyman/#product`;
+export const PRODUCT_JOURNEYMAN_ID = `${SITE_URL}/journeyman/guides/#product`;
 export const ABOUT_PAGE_ID = `${SITE_URL}/about/#aboutpage`;
 
 // The Journeyman launch film (issue #17): drop the cut at
@@ -183,6 +183,48 @@ export function breadcrumbJourneyman() {
         position: 2,
         name: 'Journeyman',
         item: `${SITE_URL}/journeyman/`,
+      },
+    ],
+  };
+}
+
+/** The /journeyman/guides page — the product's detail documentation. */
+export function journeymanGuidesPage() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${SITE_URL}/journeyman/guides/#guidespage`,
+    url: `${SITE_URL}/journeyman/guides/`,
+    name: 'Journeyman guides',
+    about: { '@id': PRODUCT_JOURNEYMAN_ID },
+    isPartOf: { '@id': WEBSITE_ID },
+    publisher: { '@id': ORG_ID },
+  };
+}
+
+/** Home → Journeyman → Guides trail for the guides page. */
+export function breadcrumbJourneymanGuides() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Journeyman',
+        item: `${SITE_URL}/journeyman/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Guides',
+        item: `${SITE_URL}/journeyman/guides/`,
       },
     ],
   };
