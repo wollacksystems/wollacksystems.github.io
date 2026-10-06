@@ -295,6 +295,12 @@ summary:focus-visible {
   margin-top: 32px;
 }
 
+.cta-note {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
 .cta-center { justify-content: center; }
 
 /* Hero */
