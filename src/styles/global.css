@@ -422,11 +422,17 @@ summary:focus-visible {
   color: var(--color-text-primary);
 }
 
-/* Facts */
+/* Facts — a wrapping flex line, not grid: every line centers as a group, so a
+   lone last row (two cells at mid widths, one at narrow) sits centered instead
+   of hugging the left track. Cells still grow to share their line evenly. */
 .grid-3 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 32px;
+}
+
+.grid-3 > * {
+  flex: 1 1 240px;
 }
 
 .fact { text-align: center; }
