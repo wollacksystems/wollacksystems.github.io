@@ -34,7 +34,7 @@ export const ORG_ID = `${SITE_URL}/#organization`;
 export const PERSON_WILL_ID = `${SITE_URL}/#will-wollack`;
 export const PERSON_ETHAN_ID = `${SITE_URL}/#ethan-davidson`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
-export const PRODUCT_JOURNEYMAN_ID = `${SITE_URL}/journeyman/guides/#product`;
+export const PRODUCT_JOURNEYMAN_ID = `${SITE_URL}/journeyman/#product`;
 export const ABOUT_PAGE_ID = `${SITE_URL}/about/#aboutpage`;
 
 // The Journeyman launch film (issue #17): drop the cut at
