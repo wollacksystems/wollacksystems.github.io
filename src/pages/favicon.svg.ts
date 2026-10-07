@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { MARK_PATH, MARK_VIEW_BOX } from '../lib/brand';
+import { MARK_PATH, MARK_VIEW_BOX } from '@/lib/brand';
 
 // Favicon (issue #13). Emitted from the same path the header lockup renders,
 // so the tab mark and the site mark cannot drift apart.
