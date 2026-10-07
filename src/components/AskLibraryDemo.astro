@@ -10,7 +10,7 @@
 //
 // Keep the ids in step: every chip's `data-ask-entry` must match one slip's
 // `data-ask-answer`, and `npm run check:demo` fails the build if that drifts.
-import { DEMO_ANSWERS, scrubPercent } from '../lib/library-demo';
+import { DEMO_ANSWERS, scrubPercent, type DemoAnswer } from '@/lib/library-demo';
 
 const demo = DEMO_ANSWERS;
 ---
@@ -39,8 +39,8 @@ const demo = DEMO_ANSWERS;
 
   <div class="ask-chips" role="group" aria-label="Sample questions">
     {
-      demo.map((entry) => (
-        <button type="button" class="ask-chip" data-ask-entry={entry.id} data-ask-match={entry.match}>
+    demo.map((entry: DemoAnswer) => (
+      <button type="button" class="ask-chip" data-ask-entry={entry.id} data-ask-match={entry.match}>
           {entry.question}
         </button>
       ))
@@ -49,7 +49,7 @@ const demo = DEMO_ANSWERS;
 
   <div class="ask-output" aria-live="polite">
     {
-      demo.map((entry, index) => (
+      demo.map((entry: DemoAnswer, index: number) => (
         <article class="ask-answer" data-ask-answer={entry.id} hidden={index !== 0}>
           <p class="ask-answer-q">{entry.question}</p>
           <p class="ask-answer-a">{entry.answer}</p>
@@ -97,7 +97,7 @@ const demo = DEMO_ANSWERS;
   // which answer slip is showing. The scoring itself lives in src/lib/retrieval.ts,
   // where `npm run check:demo` runs a labeled battery through it — deterministic
   // keyword overlap, offline, no model, no tokens.
-  import { pick, type Matchable } from '../lib/retrieval';
+  import { pick, type Matchable } from '@/lib/retrieval';
 
   const root = document.querySelector<HTMLElement>('[data-ask-demo]');
 

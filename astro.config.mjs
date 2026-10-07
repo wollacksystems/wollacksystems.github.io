@@ -8,4 +8,16 @@ export default defineConfig({
   // Required by @astrojs/sitemap and canonical/OG URLs (#9).
   site: 'https://wollacksystems.github.io',
   integrations: [sitemap()],
+
+  // Path alias: @/ maps to src/ so imports like
+  // "@/layouts/BaseLayout.astro" resolve consistently for Astro,
+  // Vite/rolldown (the build tool), and TypeScript (jsconfig/tsconfig).
+  // https://docs.astro.build/en/guides/path-alias/
+  vite: {
+    resolve: {
+      alias: {
+        '@': new URL('./src', import.meta.url).pathname,
+      },
+    },
+  },
 });
