@@ -5,7 +5,7 @@
 // pitch ("One pitch found a cofounder"); this page carries only what the landing
 // page doesn't: what Will listens for, and who writes the record down. Product
 // detail lives on /journeyman (the "Rust & Iron" variant page).
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import {
   organization,
   personWillWollack,
@@ -14,7 +14,7 @@ import {
   breadcrumbAbout,
   FOUNDER_PORTRAIT,
   COFOUNDER_PORTRAIT,
-} from '../lib/schema';
+} from '@/lib/schema';
 
 // FOUNDER_PORTRAIT is null until public/will-wollack.png exists; the hero
 // renders a typographic placeholder plate in the meantime. COFOUNDER_PORTRAIT
