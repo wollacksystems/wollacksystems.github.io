@@ -1,7 +1,8 @@
 ---
-// Landing page — the Wollack Systems story: who Will Wollack is, why it can't
-// wait, and how (hustle, networking, and a cofounder found mid-pitch).
-// Canonical slate + electric blue Industrial Editorial theme (see DESIGN.md).
+// Landing page — the Wollack Systems story, cut to the Dale test (Oct 5): why
+// it can't wait, how it works at your plant, and the work. The origin and the
+// founder live on /about, which owns them. Canonical slate + electric blue
+// Industrial Editorial theme (see DESIGN.md).
 // Product detail lives on /journeyman (the "Rust & Iron" variant page).
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import {
@@ -14,7 +15,7 @@ import {
 
 <BaseLayout
   title="Wollack Systems: capturing manufacturing expertise before it retires"
-  description="Wollack Systems writes down what America's best machinists know, hands-free, before it retires with them. Meet the founder and book a walkthrough."
+  description="Wollack Systems writes down what America's best machinists know, hands-free, before it retires with them. A mic on the operator, and your plant gets the written record."
   path="/"
   jsonLd={[organization(), personWillWollack(), personEthanDavidson(), webSite()]}
 >
@@ -55,24 +56,6 @@ import {
     </div>
   </section>
 
-  <!-- The founder -->
-  <section class="section section-tinted" id="founder">
-    <div class="container">
-      <h2>Who is Will Wollack?</h2>
-      <p class="lede">
-        The founder of Wollack Systems and the voice of Journeyman. The method is the old one: show
-        up, network, hustle. Wherever people who make things gather, the same line comes up:
-        {" "}<strong>the knowledge that runs your plant is one retirement from gone.</strong>
-      </p>
-      <div class="accent-callout">
-        <!-- The pitch itself lands once, in step 02 below. /about does not retell it. -->
-        <p>Every company starts as a pitch somebody was stubborn enough to keep giving.</p>
-      </div>
-      <p class="founder-more">
-        <a class="inline-link" href="/about/">Read the full founder story &rarr;</a>
-      </p>
-    </div>
-  </section>
 
   <!-- The mission -->
   <section class="section" id="mission">
@@ -80,12 +63,12 @@ import {
       <h2>Why it can't wait.</h2>
       <div class="grid-3">
         <div class="fact">
-          <div class="fact-number">&asymp;1/3</div>
-          <p>of US manufacturing workers are over 55. They're leaving together.</p>
-        </div>
-        <div class="fact">
-          <div class="fact-number">800 yrs</div>
-          <p>of trades. The method never changed: stand next to someone until you can do it too.</p>
+          <div class="fact-number">1 in 4</div>
+          <p>
+            of US manufacturing workers are 55 or older, per the
+            {" "}<a class="inline-link" href="https://www.bls.gov/cps/cpsaat18b.htm" target="_blank" rel="noopener">BLS Current Population Survey</a>.
+            They're leaving together.
+          </p>
         </div>
         <div class="fact">
           <div class="fact-number">First time</div>
@@ -99,32 +82,32 @@ import {
     </div>
   </section>
 
-  <!-- How it's being built -->
+  <!-- The mechanism: what a Dale asks after "why now" — what happens at MY
+       plant. Three steps, same markup as before; the origin that used to
+       live here moved to /about, which owns it. -->
   <section class="section section-tinted" id="how">
     <div class="container">
-      <h2>How: hustle, then the record.</h2>
+      <h2>How it works at your plant.</h2>
       <ol class="steps">
         <li>
-          <h3>Show up. Pitch. Repeat.</h3>
+          <h3>A mic on the operator.</h3>
           <p>
-            Selling face to face doesn't scale. Will does it anyway. Trade events, plant
-            walkthroughs, one pitch until the right person hears it.
+            We clip on a microphone and a small camera. The operator does the job and explains it
+            out loud, in their own words.
           </p>
         </li>
         <li>
-          <h3>One pitch found a cofounder.</h3>
+          <h3>Talk becomes the written record.</h3>
           <p>
-            In Newport Beach, Will pitched a room full of manufacturers.
-            {" "}<a class="inline-link" href="https://etok.me/" target="_blank" rel="noopener">Ethan Davidson</a>,
-            a software engineer formerly of Google, was one of them. They connected afterward and
-            hit it off. Ethan builds the AI that turns shop-floor talk into a written record.
+            Every session comes back in writing: step by step, searchable, in the operator's own
+            words. Your plant owns the recordings.
           </p>
         </li>
         <li>
-          <h3>Build something real.</h3>
+          <h3>Your team asks the library.</h3>
           <p>
-            Journeyman records real experts on real floors. Your plant keeps the recordings; what we
-            learn beyond your floor travels de-identified. One expert, one plant at a time.
+            A new hire, the midnight shift, anyone. Ask a plain question and get the answer, with
+            the segment it came from.
           </p>
         </li>
       </ol>
@@ -137,8 +120,7 @@ import {
       <p class="eyebrow">The work</p>
       <p class="price-anchor"><strong>Journeyman</strong></p>
       <p class="price-sub">
-        Wollack Systems writes down what your best people know, hands-free. Journeyman turns it
-        into a library your team can ask questions of.
+        Journeyman turns the written record into a library your team can ask questions of.
       </p>
       <div class="cta-row cta-center">
         <a class="btn btn-ghost" href="/journeyman/">See how Journeyman works</a>
@@ -176,9 +158,5 @@ import {
   }
   .inline-link:hover {
     color: var(--color-accent-blue);
-  }
-  .founder-more {
-    margin-top: 28px;
-    text-align: center;
   }
 </style>
