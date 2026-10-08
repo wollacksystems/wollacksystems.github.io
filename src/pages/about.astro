@@ -1,9 +1,9 @@
 ---
 // About page — the founder behind the company (blue/cobalt theme).
 //
-// Each beat of the story is told once. The landing page owns the origin and the
-// pitch ("One pitch found a cofounder"); this page carries only what the landing
-// page doesn't: what Will listens for, and who writes the record down. Product
+// Each beat of the story is told once. This page owns the origin and the pitch
+// ("One pitch found a cofounder" moved here from the landing page, Oct 5 Dale
+// test); the landing page carries the urgency and the mechanism. Product
 // detail lives on /journeyman (the "Rust & Iron" variant page).
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import {
@@ -105,11 +105,13 @@ const cofounderSrc = COFOUNDER_PORTRAIT;
       <h2>Who writes it down.</h2>
       <div class="split-with-plate">
         <div>
-          <p class="lede">Will finds the rooms and runs the capture. Ethan builds the platform.</p>
+          <p class="lede">One pitch found a cofounder.</p>
           <p>
-            Ethan Davidson, a software engineer formerly of Google, is the engineering half of
-            Wollack Systems and the builder of Journeyman. Neither half works alone: someone has to
-            stand in the room, and someone has to write down what the room knows.
+            In Newport Beach, Will pitched a room full of manufacturers. Ethan Davidson, a software
+            engineer formerly of Google, was one of them. They connected afterward and hit it off:
+            Will finds the rooms and runs the capture, Ethan builds the platform. Neither half
+            works alone — someone has to stand in the room, and someone has to write down what the
+            room knows.
           </p>
         </div>
         {
