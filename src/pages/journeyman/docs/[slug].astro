@@ -68,7 +68,23 @@ const next = index < DOCS.length - 1 ? DOCS[index + 1] : null;
     padding-top: 1.5rem;
     border-top: 1px solid var(--color-border-subtle);
   }
+  /* Theme-color the links: no global content-a rule exists, so unstyled
+     links fall back to browser purple/blue (Ethan nit 2026-10-12). */
   .docs-pager a {
     font-weight: 600;
+    color: var(--color-accent-blue);
+  }
+  .docs-pager a:hover {
+    color: var(--color-accent-hover);
+  }
+  /* Same fallback for prose links inside doc sections (scoped styles
+     reach only this page's own elements, not DocsShell). */
+  .docs-section p a,
+  .docs-section li a {
+    color: var(--color-accent-blue);
+  }
+  .docs-section p a:hover,
+  .docs-section li a:hover {
+    color: var(--color-accent-hover);
   }
 </style>
