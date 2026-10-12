@@ -1,0 +1,94 @@
+---
+// Shared docs layout: persistent sidebar + content column (Ethan nit
+// 2026-10-12: "docs should look like actual docs with sidebars"). Active
+// page gets the squared rust rail, matching the brand shape tokens
+// (--radius-sm: 0px). Used by /journeyman/docs/ and every doc page.
+import { DOCS } from '@/lib/docs-content';
+
+interface Props {
+  active: string; // 'index' or a doc slug
+}
+const { active } = Astro.props;
+---
+
+<section class="section section-tinted">
+  <div class="container docs-grid">
+    <aside class="docs-aside">
+      <nav class="docs-nav" aria-label="Operator docs">
+        <a href="/journeyman/docs/" class:list={[{ active: active === 'index' }]}>Overview</a>
+        {
+          DOCS.map((doc) => (
+            <a href={`/journeyman/docs/${doc.slug}/`} class:list={[{ active: active === doc.slug }]}>
+              {doc.title}
+            </a>
+          ))
+        }
+      </nav>
+    </aside>
+    <div class="docs-content">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .docs-grid {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: 2.75rem;
+    align-items: start;
+  }
+  .docs-aside {
+    position: sticky;
+    top: 5.5rem;
+  }
+  .docs-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .docs-nav a {
+    display: block;
+    padding: 0.45rem 0.75rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 0.92rem;
+    border-left: 2px solid transparent;
+    border-radius: var(--radius-sm);
+  }
+  .docs-nav a:hover {
+    color: var(--color-text-primary);
+    background: var(--color-surface-subtle);
+  }
+  .docs-nav a.active {
+    color: var(--color-accent-blue);
+    border-left-color: var(--color-accent-blue);
+    background: var(--color-surface-subtle);
+    font-weight: 600;
+  }
+  .docs-content {
+    min-width: 0;
+    max-width: 44rem;
+  }
+  @media (max-width: 760px) {
+    .docs-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .docs-aside {
+      position: static;
+    }
+    .docs-nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .docs-nav a {
+      border-left: none;
+      border-bottom: 2px solid transparent;
+    }
+    .docs-nav a.active {
+      border-bottom-color: var(--color-accent-blue);
+    }
+  }
+</style>

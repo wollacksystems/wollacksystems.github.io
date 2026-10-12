@@ -1,6 +1,7 @@
 ---
 // One operator doc page per entry in docs-content.ts.
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import DocsShell from '@/components/DocsShell.astro';
 import { productJourneyman, journeymanDocArticle, breadcrumbJourneymanDoc } from '@/lib/schema';
 import { DOCS, type DocPage } from '@/lib/docs-content';
 
@@ -31,40 +32,41 @@ const next = index < DOCS.length - 1 ? DOCS[index + 1] : null;
       </div>
     </div>
   </section>
-  <section class="section section-tinted">
-    <div class="container docs-body">
-      {
-        doc.sections.map((section) => (
-          <div class="docs-section">
-            <h2>{section.h}</h2>
-            <Fragment set:html={section.html} />
-          </div>
-        ))
-      }
-      <nav class="docs-pager" aria-label="More docs">
-        {prev ? <a href={`/journeyman/docs/${prev.slug}/`}>&#8592; {prev.title}</a> : <span />}
-        {next ? <a href={`/journeyman/docs/${next.slug}/`}>{next.title} &#8594;</a> : <span />}
-      </nav>
-    </div>
-  </section>
+  <DocsShell active={doc.slug}>
+    {
+      doc.sections.map((section) => (
+        <div class="docs-section">
+          <h2>{section.h}</h2>
+          <Fragment set:html={section.html} />
+        </div>
+      ))
+    }
+    <nav class="docs-pager" aria-label="More docs">
+      {prev ? <a href={`/journeyman/docs/${prev.slug}/`}>&#8592; {prev.title}</a> : <span />}
+      {next ? <a href={`/journeyman/docs/${next.slug}/`}>{next.title} &#8594;</a> : <span />}
+    </nav>
+  </DocsShell>
 </BaseLayout>
 
 <style>
-  .docs-body {
-    max-width: 44rem;
-  }
   .docs-section {
     margin-bottom: 2rem;
   }
+  /* The global h2 rule centers the box (24ch cap + margin-inline: auto) and
+     the lines (text-align: center) — prose-band styling. Docs headings pin
+     to the left edge instead. */
   .docs-section h2 {
     margin-bottom: 0.5rem;
+    text-align: left;
+    max-width: none;
+    margin-inline: 0;
   }
   .docs-pager {
     display: flex;
     justify-content: space-between;
     margin-top: 3rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--border, #33291f);
+    border-top: 1px solid var(--color-border-subtle);
   }
   .docs-pager a {
     font-weight: 600;
