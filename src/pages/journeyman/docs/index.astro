@@ -1,0 +1,60 @@
+---
+// Operator docs index — technical documentation for using the Journeyman
+// console (Ethan redirect, 2026-10-12: these live on the public site, not
+// in the product function). Linked from the guides page CTA and from the
+// console header ("Guides").
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { productJourneyman, journeymanDocsIndex, breadcrumbJourneymanDocs } from '@/lib/schema';
+import { DOCS } from '@/lib/docs-content';
+---
+
+<BaseLayout
+  title="Journeyman operator docs, a Wollack Systems product"
+  description="How to use the Journeyman console: asking, citations, playback, recordings, invites, and quotas. Operator documentation for the Journeyman product."
+  theme="journeyman"
+  path="/journeyman/docs"
+  jsonLd={[productJourneyman(), journeymanDocsIndex(), breadcrumbJourneymanDocs()]}
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Journeyman, from Wollack Systems</p>
+      <h1>Operator docs</h1>
+      <p class="lede">
+        How to use the Journeyman console: asking, citations, playback, recordings, invites, and
+        quotas.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-ghost" href="/journeyman/guides/">Back to the guides</a>
+      </div>
+    </div>
+  </section>
+  <section class="section section-tinted">
+    <div class="container">
+      <div class="grid-4">
+        {
+          DOCS.map((doc) => (
+            <a class="card docs-card" href={`/journeyman/docs/${doc.slug}/`}>
+              <h3>{doc.title}</h3>
+              <p>{doc.lede}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .docs-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 160ms ease;
+  }
+  .docs-card:hover {
+    border-color: var(--accent, #e25822);
+  }
+  .docs-card h3 {
+    margin-top: 0;
+  }
+</style>

@@ -1,0 +1,72 @@
+---
+// One operator doc page per entry in docs-content.ts.
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { productJourneyman, journeymanDocArticle, breadcrumbJourneymanDoc } from '@/lib/schema';
+import { DOCS, type DocPage } from '@/lib/docs-content';
+
+export function getStaticPaths() {
+  return DOCS.map((doc: DocPage) => ({ params: { slug: doc.slug }, props: { doc } }));
+}
+
+const { doc } = Astro.props as { doc: DocPage };
+const index = DOCS.findIndex((entry) => entry.slug === doc.slug);
+const prev = index > 0 ? DOCS[index - 1] : null;
+const next = index < DOCS.length - 1 ? DOCS[index + 1] : null;
+---
+
+<BaseLayout
+  title={`${doc.title}, Journeyman operator docs`}
+  description={doc.lede}
+  theme="journeyman"
+  path={`/journeyman/docs/${doc.slug}`}
+  jsonLd={[productJourneyman(), journeymanDocArticle(doc), breadcrumbJourneymanDoc(doc)]}
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Operator docs</p>
+      <h1>{doc.title}</h1>
+      <p class="lede">{doc.lede}</p>
+      <div class="cta-row">
+        <a class="btn btn-ghost" href="/journeyman/docs/">All operator docs</a>
+      </div>
+    </div>
+  </section>
+  <section class="section section-tinted">
+    <div class="container docs-body">
+      {
+        doc.sections.map((section) => (
+          <div class="docs-section">
+            <h2>{section.h}</h2>
+            <Fragment set:html={section.html} />
+          </div>
+        ))
+      }
+      <nav class="docs-pager" aria-label="More docs">
+        {prev ? <a href={`/journeyman/docs/${prev.slug}/`}>&#8592; {prev.title}</a> : <span />}
+        {next ? <a href={`/journeyman/docs/${next.slug}/`}>{next.title} &#8594;</a> : <span />}
+      </nav>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .docs-body {
+    max-width: 44rem;
+  }
+  .docs-section {
+    margin-bottom: 2rem;
+  }
+  .docs-section h2 {
+    margin-bottom: 0.5rem;
+  }
+  .docs-pager {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border, #33291f);
+  }
+  .docs-pager a {
+    font-weight: 600;
+  }
+</style>
