@@ -230,6 +230,67 @@ export function breadcrumbJourneymanGuides() {
   };
 }
 
+/** The /journeyman/docs index — operator documentation for the console. */
+export function journeymanDocsIndex() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${SITE_URL}/journeyman/docs/#docsindex`,
+    url: `${SITE_URL}/journeyman/docs/`,
+    name: 'Journeyman operator docs',
+    about: { '@id': PRODUCT_JOURNEYMAN_ID },
+    isPartOf: { '@id': WEBSITE_ID },
+    publisher: { '@id': ORG_ID },
+  };
+}
+
+/** Home → Journeyman → Docs trail for the docs index. */
+export function breadcrumbJourneymanDocs() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Journeyman', item: `${SITE_URL}/journeyman/` },
+      { '@type': 'ListItem', position: 3, name: 'Docs', item: `${SITE_URL}/journeyman/docs/` },
+    ],
+  };
+}
+
+/** One operator doc page as a TechArticle. */
+export function journeymanDocArticle(doc: { slug: string; title: string; lede: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    '@id': `${SITE_URL}/journeyman/docs/${doc.slug}/#doc`,
+    url: `${SITE_URL}/journeyman/docs/${doc.slug}/`,
+    name: doc.title,
+    description: doc.lede,
+    about: { '@id': PRODUCT_JOURNEYMAN_ID },
+    isPartOf: { '@id': `${SITE_URL}/journeyman/docs/#docsindex` },
+    publisher: { '@id': ORG_ID },
+  };
+}
+
+/** Home → Journeyman → Docs → page trail for one operator doc. */
+export function breadcrumbJourneymanDoc(doc: { slug: string; title: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Journeyman', item: `${SITE_URL}/journeyman/` },
+      { '@type': 'ListItem', position: 3, name: 'Docs', item: `${SITE_URL}/journeyman/docs/` },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: doc.title,
+        item: `${SITE_URL}/journeyman/docs/${doc.slug}/`,
+      },
+    ],
+  };
+}
+
 /** Home → About trail for the founder page. */
 export function breadcrumbAbout() {
   return {
