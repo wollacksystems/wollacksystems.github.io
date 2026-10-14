@@ -301,6 +301,20 @@ accent bar on callouts.
   the hero falls back to a typographic placeholder with the same frame (see
   `FEATURES.md`, drop-in portraits).
 
+- **hero-media:** The landing hero's backdrop plate — a monochrome
+  steel-duotone photograph of a machine hall (`public/hero/press-hall.webp`),
+  absolutely mounted behind the hero grid, `object-fit: cover`, scrimmed by
+  two gradients so the left text zone stays on charcoal and the plate
+  dissolves into the page ground at the bottom edge; a heavier vertical scrim
+  takes over below 820px. Two motions, both pure CSS, both static under
+  `prefers-reduced-motion`: a 48s `hero-drift` Ken Burns (scale 1.03 → 1.10
+  with a 1.4%/1.8% translate, alternating) and a staggered `hero-rise` on the
+  copy with a `hero-settle` on the invoice card. Doctrine for this slot:
+  authentic industrial work graded into the slate palette — charcoal shadows
+  (#121316) to steel highlights lifted from Secondary slate — never color
+  photography, never glossy tech stock, and electric blue stays out of
+  imagery (sole interaction color).
+
 ## Brand mark
 
 The mark is a 1-bit dithered dog head. The site ships one shape and three
