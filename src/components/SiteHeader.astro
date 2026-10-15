@@ -1,16 +1,15 @@
 ---
-// Shared header: canonical brand mark + nav. Self-detects the Journeyman page
-// from the URL path, which adds the cross-page "Home" link and switches the
-// walkthrough mailto subject.
+// Shared header: canonical brand mark + nav. The Journeyman product surface
+// moved to journeymanmfg.com (2026-10-14, extracted into
+// wollacksystems/journeyman's site/); the cross-surface slot links it
+// externally.
 //
 // The lockup is mark + wordmark. The wordmark carries the brand name, so the
 // mark is decorative to assistive tech; see src/lib/brand.ts for the mark and
 // the documented small-size variant it renders.
 import BrandMark from './BrandMark.astro';
 
-const variant = Astro.url.pathname.startsWith('/journeyman') ? 'journeyman' : 'home';
-const walkthroughSubject =
-  variant === 'journeyman' ? 'Journeyman%20walkthrough%20request' : 'Walkthrough%20request';
+const walkthroughSubject = 'Walkthrough%20request';
 ---
 
 <header class="site-header">
@@ -23,40 +22,18 @@ const walkthroughSubject =
     </div>
     <nav class="site-nav" aria-label="Primary navigation">
       <div class="desktop-nav-links">
-        {variant === 'journeyman' ? (
-          <>
-            <a href="/">Home</a>
-            <a href="/journeyman/guides/#engage">How it works</a>
-            <a href="/journeyman/guides/#pricing">Pricing</a>
-            <a href="/journeyman/docs/">Docs</a>
-          </>
-        ) : (
-          <>
-<a href="/journeyman/">Journeyman</a>
-            <a href="/about/">Who</a>
-            <a href="/#mission">Why</a>
-            <a href="/#how">How</a>
-          </>
-        )}
+        <a href="https://journeymanmfg.com/">Journeyman</a>
+        <a href="/about/">Who</a>
+        <a href="/#mission">Why</a>
+        <a href="/#how">How</a>
       </div>
       <details class="mobile-nav">
         <summary>Menu</summary>
         <div class="mobile-nav-links">
-          {variant === 'journeyman' ? (
-            <>
-              <a href="/">Home</a>
-              <a href="/journeyman/guides/#engage">How it works</a>
-              <a href="/journeyman/guides/#pricing">Pricing</a>
-              <a href="/journeyman/docs/">Docs</a>
-            </>
-          ) : (
-            <>
-<a href="/journeyman/">Journeyman</a>
-              <a href="/about/">Who</a>
-              <a href="/#mission">Why</a>
-              <a href="/#how">How</a>
-            </>
-          )}
+          <a href="https://journeymanmfg.com/">Journeyman</a>
+          <a href="/about/">Who</a>
+          <a href="/#mission">Why</a>
+          <a href="/#how">How</a>
           <a class="mobile-nav-cta" href={`mailto:willwollack@gmail.com?subject=${walkthroughSubject}`}
             >Book a walkthrough</a
           >

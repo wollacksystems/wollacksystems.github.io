@@ -2,8 +2,9 @@
  * schema.org JSON-LD entities for the site (issue #9).
  *
  * Entities reference each other by `@id` so pages can compose subsets
- * (e.g. Organization + founder on the landing page, Product + breadcrumbs
- * on /journeyman) without duplicating fields. Each object carries its own
+ * (Organization + founder on the landing page) without duplicating fields.
+ * The Journeyman Product entities moved to journeymanmfg.com with the
+ * product surface (2026-10-14, now in wollacksystems/journeyman's site/). Each object carries its own
  * `@context` so it renders as a standalone, valid script block.
  */
 
@@ -34,21 +35,7 @@ export const ORG_ID = `${SITE_URL}/#organization`;
 export const PERSON_WILL_ID = `${SITE_URL}/#will-wollack`;
 export const PERSON_ETHAN_ID = `${SITE_URL}/#ethan-davidson`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
-export const PRODUCT_JOURNEYMAN_ID = `${SITE_URL}/journeyman/#product`;
 export const ABOUT_PAGE_ID = `${SITE_URL}/about/#aboutpage`;
-
-// The Journeyman launch film (issue #17): drop the cut at
-// public/journeyman/brag.mp4 and rebuild — it then feeds both the #film
-// section on /journeyman and the VideoObject schema below. Same drop-in
-// convention as the portraits: absent file, absent video, valid page.
-export const BRAG_FILM = existsSync(join(process.cwd(), 'public', 'journeyman', 'brag.mp4'))
-  ? '/journeyman/brag.mp4'
-  : null;
-export const BRAG_FILM_POSTER = existsSync(
-  join(process.cwd(), 'public', 'journeyman', 'brag-poster.png'),
-)
-  ? '/journeyman/brag-poster.png'
-  : null;
 
 /** The company. Referenced by `founder`, `publisher`, and `brand`. */
 export function organization() {
@@ -116,42 +103,6 @@ export function webSite() {
     publisher: { '@id': ORG_ID },
   };
 }
-
-/** Journeyman, the flagship product, on /journeyman. */
-export function productJourneyman() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    '@id': PRODUCT_JOURNEYMAN_ID,
-    name: 'Journeyman',
-    description:
-      'Journeyman records how your most experienced operators do their work, in their own words, and turns it into a searchable library the plant can ask questions of and train from.',
-    brand: { '@id': ORG_ID },
-    url: `${SITE_URL}/journeyman/`,
-    manufacturer: { '@id': ORG_ID },
-  };
-}
-
-/** The 34-second launch film on /journeyman, about the product. */
-export function videoJourneymanBrag() {
-  if (!BRAG_FILM) return null;
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'VideoObject',
-    '@id': `${SITE_URL}/journeyman/#brag-film`,
-    name: 'The Journeyman launch film',
-    description:
-      "A 34-second launch film: what Journeyman captures, how the pipeline turns it into a library, and the deployed endpoint answering a real question in the site's own ask-console.",
-    thumbnailUrl: BRAG_FILM_POSTER ? `${SITE_URL}${BRAG_FILM_POSTER}` : undefined,
-    uploadDate: '2026-09-26',
-    duration: 'PT34S',
-    contentUrl: `${SITE_URL}${BRAG_FILM}`,
-    embedUrl: `${SITE_URL}/journeyman/#film`,
-    publisher: { '@id': ORG_ID },
-    about: { '@id': PRODUCT_JOURNEYMAN_ID },
-  };
-}
-
 /** The /about page — an AboutPage whose subject is the founder. */
 export function aboutPage() {
   return {
@@ -165,132 +116,6 @@ export function aboutPage() {
     isPartOf: { '@id': WEBSITE_ID },
   };
 }
-
-/** Home → Journeyman trail for the product page. */
-export function breadcrumbJourneyman() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: SITE_URL,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Journeyman',
-        item: `${SITE_URL}/journeyman/`,
-      },
-    ],
-  };
-}
-
-/** The /journeyman/guides page — the product's detail documentation. */
-export function journeymanGuidesPage() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    '@id': `${SITE_URL}/journeyman/guides/#guidespage`,
-    url: `${SITE_URL}/journeyman/guides/`,
-    name: 'Journeyman guides',
-    about: { '@id': PRODUCT_JOURNEYMAN_ID },
-    isPartOf: { '@id': WEBSITE_ID },
-    publisher: { '@id': ORG_ID },
-  };
-}
-
-/** Home → Journeyman → Guides trail for the guides page. */
-export function breadcrumbJourneymanGuides() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: SITE_URL,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Journeyman',
-        item: `${SITE_URL}/journeyman/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: 'Guides',
-        item: `${SITE_URL}/journeyman/guides/`,
-      },
-    ],
-  };
-}
-
-/** The /journeyman/docs index — operator documentation for the console. */
-export function journeymanDocsIndex() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    '@id': `${SITE_URL}/journeyman/docs/#docsindex`,
-    url: `${SITE_URL}/journeyman/docs/`,
-    name: 'Journeyman operator docs',
-    about: { '@id': PRODUCT_JOURNEYMAN_ID },
-    isPartOf: { '@id': WEBSITE_ID },
-    publisher: { '@id': ORG_ID },
-  };
-}
-
-/** Home → Journeyman → Docs trail for the docs index. */
-export function breadcrumbJourneymanDocs() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Journeyman', item: `${SITE_URL}/journeyman/` },
-      { '@type': 'ListItem', position: 3, name: 'Docs', item: `${SITE_URL}/journeyman/docs/` },
-    ],
-  };
-}
-
-/** One operator doc page as a TechArticle. */
-export function journeymanDocArticle(doc: { slug: string; title: string; lede: string }) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    '@id': `${SITE_URL}/journeyman/docs/${doc.slug}/#doc`,
-    url: `${SITE_URL}/journeyman/docs/${doc.slug}/`,
-    name: doc.title,
-    description: doc.lede,
-    about: { '@id': PRODUCT_JOURNEYMAN_ID },
-    isPartOf: { '@id': `${SITE_URL}/journeyman/docs/#docsindex` },
-    publisher: { '@id': ORG_ID },
-  };
-}
-
-/** Home → Journeyman → Docs → page trail for one operator doc. */
-export function breadcrumbJourneymanDoc(doc: { slug: string; title: string }) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Journeyman', item: `${SITE_URL}/journeyman/` },
-      { '@type': 'ListItem', position: 3, name: 'Docs', item: `${SITE_URL}/journeyman/docs/` },
-      {
-        '@type': 'ListItem',
-        position: 4,
-        name: doc.title,
-        item: `${SITE_URL}/journeyman/docs/${doc.slug}/`,
-      },
-    ],
-  };
-}
-
 /** Home → About trail for the founder page. */
 export function breadcrumbAbout() {
   return {
